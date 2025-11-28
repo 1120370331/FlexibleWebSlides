@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>1.1 SWE Agent 安装与技巧 · 新版互动演示</title>
+    <link rel="stylesheet" href="../course_template/course-template.css">
+</head>
+<body data-theme="midnight">
+    <header class="lesson-header">
+        <div class="lesson-meta">
+            <span class="lesson-tag">Module 1 · Demo</span>
+            <h1 class="lesson-title">1.1 SWE Agent 安装与简单使用技巧</h1>
+        </div>
+        <div class="lesson-nav">
+            <button class="nav-button" data-action="prev">上一页</button>
+            <div class="progress-meta">
+                <div class="progress-count">
+                    <span data-current>1</span>
+                    <span>/</span>
+                    <span data-total>1</span>
+                </div>
+                <div class="progress-track">
+                    <div class="progress-indicator"></div>
+                </div>
+            </div>
+            <button class="nav-button" data-action="next">下一页</button>
+        </div>
+    </header>
+
+    <main class="slides">
+        <!-- Slide 1 -->
+        <section class="slide is-active">
+            <div class="layout-center">
+                <div class="hero-card">
+                    <p class="pill">Lesson 1.1</p>
+                    <h1>SWE Agent 安装与使用技巧</h1>
+                    <p class="subheading">把 Codex / Claude Code 当成“虚拟实习生”，完成从安装到接单的首条闭环。</p>
+                    <div class="card-grid">
+                        <div class="concept-card">
+                            <h3>🎯 本节目标</h3>
+                            <ul>
+                                <li>理解 AI 编程 VS 传统写法的差异。</li>
+                                <li>会在 Windows 上安装 Codex（GPT-5.1-codex）。</li>
+                                <li>能配置 config.toml / auth.json 并跑通 CLI。</li>
+                                <li>掌握最小工作流：提问 → 生成 → 改进 → 交付。</li>
+                            </ul>
+                        </div>
+                        <div class="concept-card">
+                            <h3>🧠 记忆锚点</h3>
+                            <ul>
+                                <li>AI 编程 = 用自然语言驱动代码。</li>
+                                <li>Codex 像命令行里的“贴身助理”。</li>
+                                <li>参数三件套：模型、沙箱、审批。</li>
+                            </ul>
+                        </div>
+                        <div class="concept-card">
+                            <h3>📚 情境代入</h3>
+                            <p>想象你是接单工作室的“版本管家”，需要随叫随到地配置 Agent、解读指令，并协助完成静态站点。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 2 -->
+        <section class="slide">
+            <div class="layout-center">
+                <div class="panel">
+                    <h2>AI 编程 = 把重复劳动交给 Agent</h2>
+                    <div class="concept-card">
+                        <h3>定义</h3>
+                        <p>AI 编程 = <strong>想法</strong> → <strong>自然语言描述</strong> → <strong>Agent 拆解 / 产出代码</strong> → <strong>人类审核</strong>。不把脑子交出去，而是把琐事交给 AI。</p>
+                    </div>
+                    <div class="card-grid">
+                        <div class="concept-card">
+                            <h3>传统流程</h3>
+                            <p>查资料 → 写代码 → 改 Bug，全靠自己。</p>
+                        </div>
+                        <div class="concept-card">
+                            <h3>AI 协作</h3>
+                            <p>描述需求 → AI 给方案 / 代码 / 复盘，你负责决策。</p>
+                        </div>
+                        <div class="concept-card">
+                            <h3>课堂提醒</h3>
+                            <p>每次提问要交代「目标 + 现状 + 约束」，否则 Agent 无法高质量落地。</p>
+                        </div>
+                    </div>
+                    <blockquote class="blockquote">可以这样记：<strong>人脑做判断</strong>，<strong>Agent 做执行</strong>。</blockquote>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 3 -->
+        <section class="slide">
+            <div class="layout-split">
+                <div class="panel">
+                    <h2>Cursor：IDE 里的 AI 编辑器</h2>
+                    <img src="./cursor.png" alt="Cursor 编辑器界面示意" style="width:100%;border-radius:16px;margin-bottom:1rem;box-shadow:var(--shadow-card);">
+                    <ul class="summary-list">
+                        <li>选中代码直接聊天，适合边写边问。</li>
+                        <li>可针对整个项目问“怎么改”。</li>
+                        <li>非常适合初次体验 AI 编程。</li>
+                    </ul>
+                    <p class="hint">👉 课堂提示：把 Cursor 当作“有 AI 的 VS Code”。</p>
+                </div>
+                <div class="panel">
+                    <h2>SWE Agent（Codex / Claude Code）</h2>
+                    <div class="concept-card">
+                        <h3>Codex = GPT‑5.1-codex</h3>
+                        <p>命令行驻场，负责执行指令、跑脚本、编辑文件。</p>
+                        <img src="./codex.png" alt="Codex 终端示意" style="width:100%;border-radius:12px;margin-top:0.75rem;">
+                    </div>
+                    <div class="concept-card">
+                        <h3>Claude Code = Sonnet 4.5</h3>
+                        <p>擅长发散思维、复杂排查，费用更高。</p>
+                        <img src="./claude.png" alt="Claude Code 终端示意" style="width:100%;border-radius:12px;margin-top:0.75rem;">
+                    </div>
+                    <p class="hint">组合拳：<strong>轻量任务用 Codex，复杂架构找 Claude</strong>。</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 4 -->
+        <section class="slide">
+            <div class="layout-center">
+                <div class="panel">
+                    <h2>如何选择：Codex vs Claude Code</h2>
+                    <div class="card-grid">
+                        <div class="concept-card">
+                            <h3>Codex (GPT‑5.1-codex)</h3>
+                            <ul>
+                                <li>价格友好，课堂主要示范。</li>
+                                <li>拆解步骤、执行指令非常稳。</li>
+                                <li>适合日常 Coding / Debug / 补文档。</li>
+                            </ul>
+                        </div>
+                        <div class="concept-card">
+                            <h3>Claude Code (Sonnet 4.5)</h3>
+                            <ul>
+                                <li>发散思维、方案比较更强。</li>
+                                <li>调研 / 架构讨论 / 高难定位更适合。</li>
+                                <li>价格约为 GPT‑5 的 5 倍。</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="alert alert-info">课堂默认站位：<strong>用 Codex 讲流程</strong>，在需要多角度思考时示范 Claude Code。</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 5 -->
+        <section class="slide">
+            <div class="layout-center">
+                <div class="panel">
+                    <h2>Windows 安装三步走</h2>
+                    <div class="timeline">
+                        <div class="timeline-item">
+                            <div class="timeline-bullet"></div>
+                            <div class="timeline-content">
+                                <h4>1. 安装 Node.js</h4>
+                                <p>Node = 运行 Codex CLI 的引擎。确保 <code>node -v</code> 和 <code>npm -v</code> 有输出。</p>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-bullet"></div>
+                            <div class="timeline-content">
+                                <h4>2. 安装 Codex</h4>
+                                <p><code>npm install -g @openai/codex</code>，然后执行 <code>codex --version</code>。</p>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-bullet"></div>
+                            <div class="timeline-content">
+                                <h4>3. 配置凭证</h4>
+                                <p>在 <code>~/.codex/config.toml</code> 与 <code>auth.json</code> 写入 API Key / Base URL，确保 CLI 能登陆。</p>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="hint">遇到报错：先看 Node 版本，再查网络代理与权限。</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 6 -->
+        <section class="slide">
+            <div class="layout-split">
+                <div class="panel">
+                    <h2>常用启动命令</h2>
+                    <div class="code-block">
+<pre>
+codex -m gpt-5.1-codex 
+  --reasoning-effort high 
+  --ask-for-approval on-request 
+  --sandbox workspace-write
+</pre>
+                    </div>
+                    <ul class="summary-list">
+                        <li><code>-m</code>：指定模型。</li>
+                        <li><code>--reasoning-effort</code>：思考强度（low / medium / high）。</li>
+                        <li><code>--ask-for-approval</code>：审批机制（never / on-request / always）。</li>
+                        <li><code>--sandbox</code>：磁盘权限。</li>
+                    </ul>
+                </div>
+                <div class="panel">
+                    <h2>配置文件速览</h2>
+                    <div class="reveal-group">
+                        <button class="reveal-trigger" data-reveal="config-detail">💡 点击查看 config.toml 示例</button>
+                        <div class="reveal-content" id="config-detail">
+                            <div class="code-block">
+<pre>
+model_provider = "fox"
+model = "gpt-5.1-codex"
+model_reasoning_effort = "high"
+disable_response_storage = true
+
+[model_providers.fox]
+name = "fox"
+base_url = "https://code.newcli.com/codex/v1"
+wire_api = "responses"
+requires_openai_auth = true
+</pre>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="hint">Auth Key 放在 <code>~/.codex/auth.json</code>，不要提交到 Git。</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 7 -->
+        <section class="slide">
+            <div class="layout-center">
+                <div class="panel">
+                    <h2>练习：命令参数判断题</h2>
+                    <p>请选择最合适的参数搭配，完成 Codex 的安全启动。</p>
+                    <div class="task-card" data-quiz="cli">
+                        <div class="quiz-question">
+                            <label>1) 想确保每次写文件都要确认，应选择：
+                                <select data-question="1">
+                                    <option value="">请选择</option>
+                                    <option value="A">A. <code>--sandbox danger-full-access</code></option>
+                                    <option value="B">B. <code>--ask-for-approval always</code></option>
+                                    <option value="C">C. <code>--reasoning-effort high</code></option>
+                                </select>
+                            </label>
+                        </div>
+                        <div class="quiz-question">
+                            <label>2) 想要无沙箱、可访问任意目录，应选择：
+                                <select data-question="2">
+                                    <option value="">请选择</option>
+                                    <option value="A">A. <code>--ask-for-approval never</code></option>
+                                    <option value="B">B. <code>--sandbox workspace-write</code></option>
+                                    <option value="C">C. <code>--sandbox danger-full-access</code></option>
+                                </select>
+                            </label>
+                        </div>
+                        <div class="quiz-question">
+                            <label>3) 想节约点数、快速响应，可以：
+                                <select data-question="3">
+                                    <option value="">请选择</option>
+                                    <option value="A">A. <code>--reasoning-effort low</code></option>
+                                    <option value="B">B. <code>-m gpt-4o</code></option>
+                                    <option value="C">C. <code>--ask-for-approval on-request</code></option>
+                                </select>
+                            </label>
+                        </div>
+                        <button class="nav-button quiz-check">提交答案</button>
+                        <p class="quiz-result"></p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 8 -->
+        <section class="slide">
+            <div class="layout-split">
+                <div class="panel">
+                    <h2>MCP：给 Agent 插“外设”</h2>
+                    <div class="steps" data-active-step="2">
+                        <div class="step" data-step="1">
+                            <h4>Step 1 · 找到 MCP Server</h4>
+                            <p>如 Contect7、local fs、数据库查询等。</p>
+                        </div>
+                        <div class="step" data-step="2">
+                            <h4>Step 2 · 运行安装脚本</h4>
+                            <p>在 Agent 对话中粘贴官方指令，授予权限。</p>
+                        </div>
+                        <div class="step" data-step="3">
+                            <h4>Step 3 · /mcp list-tools</h4>
+                            <p>确认指令可用，写入 CLAUDE.md / SWE_AGENTS.md 方便复用。</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel">
+                    <h2>课堂演示：Contect7</h2>
+                    <div class="concept-card">
+                        <h3>提示词模板</h3>
+                        <p>“请根据官方文档一步步帮我安装 Contect7 MCP 服务器，并在成功后列出可调用的工具列表。”</p>
+                    </div>
+                    <div class="task-card">
+                        <h3>📝 操作任务</h3>
+                        <ol>
+                            <li>向 Codex 贴出指令，请它执行。</li>
+                            <li>遇到失败，查看日志并重试。</li>
+                            <li>整理成功步骤，写入你的课程笔记。</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 9 -->
+        <section class="slide">
+            <div class="layout-center">
+                <div class="panel">
+                    <h2>实战实验室：星光摄影工作室 Hero 区</h2>
+                    <p>修改右侧实验室的文案或配色，立即预览。练习如何把“自然语言需求”映射到 HTML + CSS。</p>
+                    <div class="lab" data-lab="starlight" data-auto-run="input">
+                        <div class="lab-tabs">
+                            <button class="lab-tab is-active" data-lang="html">HTML</button>
+                            <button class="lab-tab" data-lang="css">CSS</button>
+                        </div>
+                        <div class="lab-editors">
+                            <textarea data-lang="html" class="is-active">
+<section class="hero">
+  <p class="pill">Starlight Studio</p>
+  <h1>捕捉每一道校园高光</h1>
+  <p class="lead">记录社团活动、毕业季写真与品牌视觉，24 小时内交付初稿。</p>
+  <div class="hero-actions">
+    <button class="primary">立即预约</button>
+    <button class="ghost">查看作品</button>
+  </div>
+</section>
+                            </textarea>
+                            <textarea data-lang="css">
+.hero {
+  padding: 3rem;
+  border-radius: 24px;
+  background: linear-gradient(135deg,#0f172a,#312e81);
+  color: #e0e7ff;
+  box-shadow: var(--shadow-card);
+}
+.hero .pill {
+  display: inline-flex;
+  padding: 0.25rem 0.75rem;
+  border-radius: 999px;
+  background: rgba(255,255,255,0.1);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+.hero h1 { font-size: 2.5rem; margin: 1rem 0; }
+.hero .lead { color: rgba(255,255,255,0.8); margin-bottom: 1.5rem; }
+.hero-actions { display: flex; gap: 1rem; }
+.hero-actions .primary {
+  background: #f472b6;
+  color: #0f172a;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 999px;
+  font-weight: 600;
+}
+.hero-actions .ghost {
+  border: 1px solid rgba(255,255,255,0.3);
+  background: transparent;
+  color: #fff;
+  padding: 0.75rem 1.5rem;
+  border-radius: 999px;
+}
+                            </textarea>
+                        </div>
+                        <div class="lab-preview">
+                            <div class="lab-preview__header">
+                                <span>Live Preview</span>
+                            </div>
+                            <iframe title="Starlight Lab"></iframe>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 10 -->
+        <section class="slide">
+            <div class="layout-center">
+                <div class="panel">
+                    <h2>现实价值与课堂作业</h2>
+                    <div class="card-grid">
+                        <div class="concept-card">
+                            <h3>🌏 现实价值</h3>
+                            <ul>
+                                <li>使用 Codex 可在 1 小时内交付静态官网 Demo。</li>
+                                <li>日常接单：单页宣传站 500~1500 元，复杂多端 2000+。</li>
+                                <li>记录配置与脚本方便复用，形成个人工作流资产。</li>
+                            </ul>
+                        </div>
+                        <div class="task-card">
+                            <h3>📝 作业 Checklist</h3>
+                            <ol>
+                                <li>完成 Node + Codex 安装截图。</li>
+                                <li>提交 config.toml / auth.json 模板（敏感信息打码）。</li>
+                                <li>与 Codex 协作完成一个 3 区块页面，并上传仓库。</li>
+                            </ol>
+                        </div>
+                    </div>
+                    <p class="hint">下节课我们会用相同的 Agent 去复习 Python 与环境管理。</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="lesson-footer">
+        模版版本：course_template v2.0 · 本页内容最后更新 2025-11-27
+    </footer>
+
+    <script src="../course_template/course-template.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', initCliQuiz);
+
+        function initCliQuiz() {
+            const container = document.querySelector('[data-quiz="cli"]');
+            if (!container) return;
+            const button = container.querySelector('.quiz-check');
+            const selects = container.querySelectorAll('select[data-question]');
+            const result = container.querySelector('.quiz-result');
+            const answers = { '1': 'B', '2': 'C', '3': 'A' };
+
+            button?.addEventListener('click', () => {
+                let wrong = [];
+                let blank = [];
+                selects.forEach((select) => {
+                    const qid = select.dataset.question;
+                    select.classList.remove('quiz-wrong', 'quiz-correct');
+                    if (!select.value) {
+                        blank.push(qid);
+                        return;
+                    }
+                    if (select.value === answers[qid]) {
+                        select.classList.add('quiz-correct');
+                    } else {
+                        select.classList.add('quiz-wrong');
+                        wrong.push(qid);
+                    }
+                });
+
+                if (blank.length) {
+                    result.textContent = '还有题目未作答：' + blank.join(', ');
+                    result.style.color = '#b45309';
+                    return;
+                }
+
+                if (!wrong.length) {
+                    result.textContent = '🎉 恭喜全部正确，可以继续进阶任务！';
+                    result.style.color = '#059669';
+                } else {
+                    result.textContent = '请复查题号：' + wrong.join(', ');
+                    result.style.color = '#b45309';
+                }
+            });
+        }
+    </script>
+</body>
+</html>

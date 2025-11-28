@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2.2 前端三件套基础 · 新课程模版演示</title>
+    <link rel="stylesheet" href="../course_template/course-template.css">
+</head>
+<body>
+    <header class="lesson-header">
+        <div class="lesson-meta">
+            <span class="lesson-tag">Module 2 · Demo</span>
+            <h1 class="lesson-title">前端三件套基础 - 互动式教学模版</h1>
+        </div>
+        <div class="lesson-nav">
+            <button class="nav-button" data-action="prev">上一页</button>
+            <div class="progress-meta">
+                <div class="progress-count">
+                    <span data-current>1</span>
+                    <span>/</span>
+                    <span data-total>10</span>
+                </div>
+                <div class="progress-track">
+                    <div class="progress-indicator"></div>
+                </div>
+            </div>
+            <button class="nav-button" data-action="next">下一页</button>
+        </div>
+    </header>
+
+    <main class="slides">
+        <!-- Slide 1 -->
+        <section class="slide is-active">
+            <div class="layout-center">
+                <div class="hero-card">
+                    <p class="pill">Lesson 2.2</p>
+                    <h1>前端三件套：HTML · CSS · JavaScript</h1>
+                    <p class="subheading">了解网页背后的“分工”与“协作”</p>
+                    <div class="card-grid">
+                        <div class="concept-card">
+                            <h3>HTML · 结构</h3>
+                            <p>像房子的户型图与墙体，负责内容和层级。</p>
+                        </div>
+                        <div class="concept-card">
+                            <h3>CSS · 表现</h3>
+                            <p>像装修风格与家具摆放，负责颜色与排版。</p>
+                        </div>
+                        <div class="concept-card">
+                            <h3>JavaScript · 交互</h3>
+                            <p>像通电后能开灯、按门铃，负责行为逻辑。</p>
+                        </div>
+                    </div>
+                    <div class="concept-card" style="margin-top:2rem;">
+                        <h3>🎯 学习目标</h3>
+                        <ul>
+                            <li>弄清 HTML / CSS / JS 的分工与协作。</li>
+                            <li>用最小语法颗粒，读懂并改动简单页面。</li>
+                            <li>练习“找元素 → 改样式 → 绑事件”三步走。</li>
+                            <li>复盘“星光摄影工作室”单页的结构与风格。</li>
+                        </ul>
+                        <p class="hint">记忆锚点：HTML 放骨架，CSS 穿衣服，JavaScript 让它会动。</p>
+                    </div>
+                    <img src="../../内容/实际教案/2.2 前端三件套基础/前端三件套的工作原理.png" alt="前端三件套的工作原理">
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 2 -->
+        <section class="slide">
+            <div class="layout-center">
+                <div class="panel">
+                    <h2>HTML：先搭骨架，再往里放内容</h2>
+                    <div class="concept-card">
+                        <h3>🏠 生活类比 · 家里的户型图</h3>
+                        <p>把 HTML 想成“家里的户型图”：</p>
+                        <ul>
+                            <li>🚪 <code>&lt;header&gt;</code> 是门厅</li>
+                            <li>🛋️ <code>&lt;main&gt;</code> 是客厅</li>
+                            <li>🛏️ <code>&lt;section&gt;</code> 是房间</li>
+                        </ul>
+                        <p>先把房间画出来，再慢慢放家具。</p>
+                    </div>
+                    <h3>📜 核心语法速查</h3>
+                    <div class="card-grid">
+                        <div class="concept-card">
+                            <p><code>&lt;h1&gt;~&lt;h6&gt;</code> 标题，按重要性递减。</p>
+                            <p><code>&lt;p&gt;</code> 段落，容纳正文。</p>
+                            <p><code>&lt;a&gt;</code> 链接，跳转页面或锚点。</p>
+                        </div>
+                        <div class="concept-card">
+                            <p><code>&lt;img&gt;</code> 展示图片，记得写 <code>alt</code>。</p>
+                            <p><code>&lt;ul&gt;&lt;li&gt;</code> 列表，罗列要点。</p>
+                            <p><code>&lt;button&gt;</code> 按钮，建议加 <code>type="button"</code>。</p>
+                        </div>
+                        <div class="concept-card">
+                            <p><code>&lt;input&gt;</code>/<code>&lt;textarea&gt;</code> 输入控件。</p>
+                            <p><code>&lt;div&gt;</code> 通用容器。</p>
+                            <p><code>&lt;section&gt; &lt;nav&gt; &lt;footer&gt;</code> 更语义的容器。</p>
+                        </div>
+                    </div>
+                    <p class="hint">👉 下一页：动手体验 HTML 骨架</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 3 -->
+        <section class="slide">
+            <div class="layout-split">
+                <div class="panel">
+                    <h2>HTML 实操 · 改改骨架</h2>
+                    <p>这是“星光摄影工作室”的图纸，请尝试修改。</p>
+                    <div class="task-card">
+                        <h3>📝 课堂任务 1</h3>
+                        <ol>
+                            <li><strong>改内容</strong>：修改 <code>&lt;p&gt;</code> 文案为你喜欢的标语。</li>
+                            <li><strong>加列表</strong>：在 <code>&lt;ul&gt;</code> 中增加“商业静物”。</li>
+                            <li><strong>改链接</strong>：把 <code>href="#"</code> 改成 <code>#services</code>。</li>
+                        </ol>
+                    </div>
+                    <blockquote class="blockquote">改完右侧代码，预览会立即更新。</blockquote>
+                </div>
+                <div class="panel soft">
+                    <div class="lab" data-lab="html-structure" data-auto-run="input">
+                        <div class="lab-editors">
+                            <textarea class="is-active" data-lang="html">
+<div style="padding: 20px; font-family: sans-serif;">
+    <header>
+        <h1>星光摄影工作室</h1>
+        <p>用镜头捕捉你的高光时刻。</p>
+        <a href="#">立即预约</a>
+    </header>
+
+    <hr>
+
+    <main>
+        <h3 id="services">我们的服务</h3>
+        <ul>
+            <li>人像摄影</li>
+            <li>婚礼跟拍</li>
+            <!-- TODO: 在这里加一个新的服务 -->
+        </ul>
+    </main>
+
+    <footer style="margin-top: 50px; color: #666;">
+        <p>联系我们：微信 starlight-photo</p>
+    </footer>
+</div>
+                            </textarea>
+                        </div>
+                        <div class="lab-preview">
+                            <div class="lab-preview__header">
+                                <span>实时预览</span>
+                            </div>
+                            <iframe title="HTML Playground"></iframe>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 4 -->
+        <section class="slide">
+            <div class="layout-center">
+                <div class="panel">
+                    <h2>CSS：给房子选颜色和摆家具</h2>
+                    <div class="concept-card">
+                        <h3>📦 核心概念：盒模型</h3>
+                        <ul>
+                            <li><strong>padding</strong> = 坐垫厚度，决定内容与边框的距离。</li>
+                            <li><strong>margin</strong> = 家具之间的走道。</li>
+                            <li><strong>border</strong> = 家具的外框。</li>
+                        </ul>
+                    </div>
+                    <h3>🎨 语法示例</h3>
+                    <div class="code-block">
+<pre>
+/* 选择器：指明要装修谁 */
+.hero {                     
+    background: #0d1b2a;    
+    color: white;           
+    padding: 48px 24px;     
+}
+
+p {                         
+    font-size: 16px;        
+    margin-bottom: 20px;    
+}</pre>
+                    </div>
+                    <div class="concept-card">
+                        <h3>🔎 选择器速览</h3>
+                        <ul>
+                            <li><code>p { ... }</code> 标签选择器。</li>
+                            <li><code>.hero { ... }</code> 类选择器。</li>
+                            <li><code>#contact { ... }</code> ID 选择器。</li>
+                        </ul>
+                    </div>
+                    <p class="hint">👉 下一页：开始“装修”页面</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 5 -->
+        <section class="slide">
+            <div class="layout-split">
+                <div class="panel">
+                    <h2>CSS 实操 · 美化页面</h2>
+                    <p>页面有点素，用 CSS 上色、调间距、加圆角。</p>
+                    <div class="task-card">
+                        <h3>📝 课堂任务 2</h3>
+                        <ol>
+                            <li><strong>改背景</strong>：修改 <code>.hero</code> 背景色。</li>
+                            <li><strong>调间距</strong>：把 <code>padding: 40px;</code> 改成 <code>100px;</code>。</li>
+                            <li><strong>加圆角</strong>：给 <code>.btn</code> 增加 <code>border-radius</code>。</li>
+                        </ol>
+                    </div>
+                    <ul>
+                        <li><code>:hover</code> = 鼠标悬停状态。</li>
+                        <li><code>text-align: center;</code> = 文本居中。</li>
+                    </ul>
+                </div>
+                <div class="panel soft">
+                    <div class="lab" data-lab="css-hero" data-auto-run="input">
+                        <div class="lab-tabs">
+                            <button class="lab-tab is-active" data-lang="css">CSS</button>
+                            <button class="lab-tab" data-lang="html">HTML</button>
+                        </div>
+                        <div class="lab-editors">
+                            <textarea data-lang="css" class="is-active">
+body { 
+    font-family: sans-serif; 
+    margin: 0; 
+}
+
+.hero {
+    background: linear-gradient(135deg, #0d1b2a, #1b263b);
+    color: white;
+    padding: 40px;
+    text-align: center;
+    border-radius: 8px;
+}
+
+.hero h1 {
+    font-size: 32px;
+    margin-bottom: 10px;
+    color: #f4a261;
+}
+
+.btn {
+    display: inline-block;
+    background: #e2e8f0;
+    color: #1e293b;
+    text-decoration: none;
+    padding: 10px 20px;
+    margin-top: 20px;
+    /* TODO: 在这里加 border-radius */
+}
+
+.btn:hover {
+    background: white;
+}
+                            </textarea>
+                            <textarea data-lang="html">
+<div class="hero">
+    <h1>星光摄影</h1>
+    <p>记录美好瞬间</p>
+    <a href="#" class="btn">查看作品</a>
+</div>
+                            </textarea>
+                        </div>
+                        <div class="lab-preview">
+                            <div class="lab-preview__header">
+                                <span>实时预览</span>
+                            </div>
+                            <iframe title="CSS Playground"></iframe>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 6 -->
+        <section class="slide">
+            <div class="layout-center">
+                <div class="panel">
+                    <h2>JavaScript：给房子通电</h2>
+                    <div class="concept-card">
+                        <h3>⚡ 它能干嘛？</h3>
+                        <p>改内容、改样式、响应点击、发网络请求——JS 让页面“活”起来。</p>
+                        <p><strong>DOM</strong> = 浏览器把页面看成一棵树，每个标签都是节点，JS 可以修改它。</p>
+                    </div>
+                    <div class="timeline">
+                        <div class="timeline-item">
+                            <div class="timeline-bullet"></div>
+                            <div class="timeline-content">
+                                <h4>1. 找元素</h4>
+                                <p><code>document.querySelector("#btn")</code></p>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-bullet"></div>
+                            <div class="timeline-content">
+                                <h4>2. 绑事件</h4>
+                                <p><code>btn.addEventListener("click", ...)</code></p>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-bullet"></div>
+                            <div class="timeline-content">
+                                <h4>3. 做事情</h4>
+                                <p><code>alert("你好");</code> 或 <code>title.style.color = "red"</code></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="concept-card">
+                        <p><strong>延伸</strong>：未来可用 <code>fetch('/api')</code> 拿数据，再用 <code>textContent</code> 填回页面。</p>
+                    </div>
+                    <p class="hint">👉 下一页：亲自“接线”</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 7 -->
+        <section class="slide">
+            <div class="layout-split">
+                <div class="panel">
+                    <h2>JavaScript 实操 · 点亮按钮</h2>
+                    <p>右侧是抢购卡片，但按钮没反应，请修复它。</p>
+                    <div class="task-card">
+                        <h3>📝 课堂任务 3</h3>
+                        <ol>
+                            <li>把 <code>alert</code> 文案改成“恭喜，抢到了！”。</li>
+                            <li>取消注释 <code>msg.textContent</code> 行。</li>
+                            <li>取消注释 <code>title.style.color</code> 行，体验样式变化。</li>
+                        </ol>
+                    </div>
+                    <blockquote class="blockquote">修改 JS 后，点击“运行代码”按钮生效。</blockquote>
+                </div>
+                <div class="panel soft">
+                    <div class="lab" data-lab="js-flash-sale">
+                        <div class="lab-tabs">
+                            <button class="lab-tab" data-lang="html">HTML</button>
+                            <button class="lab-tab" data-lang="css">CSS</button>
+                            <button class="lab-tab is-active" data-lang="js">JS</button>
+                        </div>
+                        <div class="lab-editors">
+                            <textarea data-lang="html">
+<div class="card">
+    <h2 id="title">特惠套餐</h2>
+    <p>原价 999，现价 699！</p>
+    <button id="book-btn">立即抢购</button>
+    <p id="msg" style="color:green; font-weight:bold; min-height: 24px;"></p>
+</div>
+                            </textarea>
+                            <textarea data-lang="css">
+.card { 
+    border: 1px solid #ccc; 
+    padding: 30px; 
+    text-align: center; 
+    font-family: sans-serif;
+    border-radius: 8px;
+    margin: 20px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    background: white;
+}
+button {
+    background: #3b82f6;
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background 0.2s;
+}
+button:hover { background: #2563eb; }
+                            </textarea>
+                            <textarea data-lang="js" class="is-active">
+var btn = document.querySelector('#book-btn');
+var title = document.querySelector('#title');
+var msg = document.querySelector('#msg');
+
+btn.addEventListener('click', function() {
+    alert("恭喜！抢购成功！");
+    // msg.textContent = "订单已确认，请留意短信。";
+    // title.style.color = '#e11d48';
+});
+                            </textarea>
+                        </div>
+                        <div class="lab-preview">
+                            <div class="lab-preview__header">
+                                <span>预览（点击运行）</span>
+                                <button class="lab-run" data-action="run">▶ 运行代码</button>
+                            </div>
+                            <iframe title="JS Playground"></iframe>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 8 -->
+        <section class="slide">
+            <div class="layout-center">
+                <div class="panel">
+                    <h2>复盘：三件套如何协同</h2>
+                    <p>回到“星光摄影工作室”单页，拆解其构成。</p>
+                    <div class="card-grid">
+                        <div class="concept-card">
+                            <h3>🦴 HTML 骨架</h3>
+                            <ul>
+                                <li><strong>nav</strong>：顶部导航。</li>
+                                <li><strong>header.hero</strong>：头部大图、标题、按钮。</li>
+                                <li><strong>section#work</strong>：作品展示区。</li>
+                                <li><strong>section#contact</strong>：联系信息区。</li>
+                            </ul>
+                        </div>
+                        <div class="concept-card">
+                            <h3>🎨 CSS 样式</h3>
+                            <ul>
+                                <li>Flex 布局导航，Grid 布局画廊。</li>
+                                <li><code>:root</code> 定义主题色，整体统一。</li>
+                                <li>加阴影、圆角，营造轻盈质感。</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <img src="../../内容/实际教案/2.2 前端三件套基础/前端三件套的工作原理.png" alt="协同原理示意图" style="margin-top:2rem;">
+                    <blockquote class="blockquote">“HTML 定块，CSS 定颜值，JS 负责交互。”</blockquote>
+                    <p class="hint">👉 下一页：完整代码检阅</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 9 -->
+        <section class="slide">
+            <div class="layout-split">
+                <div class="panel">
+                    <h2>综合案例 · 代码检阅</h2>
+                    <p>像读文章一样读完整代码，定位各区域。</p>
+                    <div class="task-card">
+                        <h3>🔍 终极任务</h3>
+                        <ol>
+                            <li>把 <code>:root</code> 中 <code>--primary</code> 改为 <code>#10b981</code>，观察风格变化。</li>
+                            <li>在作品画廊中复制一张卡片，扩充内容。</li>
+                        </ol>
+                    </div>
+                    <p>熟练“找元素 → 改样式 → 绑事件”，就是前端开发的核心流程。</p>
+                </div>
+                <div class="panel soft">
+                    <div class="lab" data-lab="full-page">
+                        <div class="lab-tabs">
+                            <button class="lab-tab is-active" data-lang="html">HTML</button>
+                            <button class="lab-tab" data-lang="css">CSS</button>
+                            <button class="lab-tab" data-lang="js">JS</button>
+                        </div>
+                        <div class="lab-editors">
+                            <textarea data-lang="html" class="is-active">
+<nav>
+    <div class="logo">📷 星光 STUDIO</div>
+    <div class="links">
+        <a href="#work">作品</a>
+        <a href="#contact">联系</a>
+    </div>
+</nav>
+
+<header class="hero">
+    <h1>捕捉你的高光时刻</h1>
+    <p>专业人像 · 婚礼跟拍 · 商业静物</p>
+    <a href="#contact" class="btn">预约档期</a>
+</header>
+
+<section id="work">
+    <h2>最新作品</h2>
+    <div class="gallery-grid">
+        <div class="item">作品 A</div>
+        <div class="item">作品 B</div>
+        <div class="item">作品 C</div>
+        <div class="item">作品 D</div>
+    </div>
+</section>
+
+<footer id="contact">
+    <p>© 2023 星光摄影工作室</p>
+</footer>
+                            </textarea>
+                            <textarea data-lang="css">
+:root {
+    --primary: #f4a261;
+    --dark: #1d3557;
+    --light: #f1f5f9;
+}
+
+body { font-family: 'Segoe UI', sans-serif; margin: 0; color: #333; background: var(--light); }
+
+nav {
+    display: flex; justify-content: space-between; padding: 1rem 2rem;
+    background: white; box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    position: sticky; top: 0;
+}
+.logo { font-weight: bold; color: var(--dark); font-size: 1.2rem; }
+.links a { margin-left: 1rem; text-decoration: none; color: #666; transition: color 0.3s; }
+.links a:hover { color: var(--primary); }
+
+.hero {
+    background: var(--dark); color: white;
+    padding: 4rem 2rem; text-align: center;
+    margin-bottom: 2rem;
+}
+.hero h1 { margin: 0 0 1rem; font-size: 2.5rem; }
+.btn {
+    display: inline-block; margin-top: 1rem; padding: 0.8rem 1.5rem;
+    background: var(--primary); color: var(--dark);
+    text-decoration: none; border-radius: 4px; font-weight: bold;
+    transition: transform 0.2s;
+}
+.btn:hover { transform: scale(1.05); }
+
+.gallery-grid {
+    display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem;
+    padding: 0 2rem 2rem; max-width: 800px; margin: 0 auto;
+}
+.item {
+    background: white; height: 150px;
+    display: flex; align-items: center; justify-content: center;
+    color: #999; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+footer { text-align: center; padding: 2rem; color: #999; font-size: 0.9rem; }
+                            </textarea>
+                            <textarea data-lang="js">
+console.log("页面已加载 - 星光摄影工作室");
+
+document.querySelector('.btn').addEventListener('click', function(e) {
+    var target = document.querySelector('#contact');
+    if (target && target.scrollIntoView) {
+        e.preventDefault();
+        target.scrollIntoView({ behavior: 'smooth' });
+    }
+});
+                            </textarea>
+                        </div>
+                        <div class="lab-preview">
+                            <div class="lab-preview__header">
+                                <span>完整预览</span>
+                                <button class="lab-run" data-action="run">▶ 刷新</button>
+                            </div>
+                            <iframe title="完整页面预览"></iframe>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 10 -->
+        <section class="slide">
+            <div class="layout-center">
+                <div class="panel">
+                    <h2>总结与展望</h2>
+                    <p>通过“星光摄影”的案例，我们实践了三件套：</p>
+                    <ul class="summary-list">
+                        <li>✅ HTML 负责骨架与内容层级。</li>
+                        <li>✅ CSS 负责视觉风格与排版。</li>
+                        <li>✅ JavaScript 负责交互与数据。</li>
+                    </ul>
+                    <div class="concept-card">
+                        <h3>🚀 下一节预告：React</h3>
+                        <p>当页面需要频繁更新或组件化，React 可以大幅减轻“手动 wiring”的负担。</p>
+                    </div>
+                    <div class="concept-card">
+                        <h3>🌏 现实价值</h3>
+                        <ul>
+                            <li>三件套是所有 Web 框架的基石。</li>
+                            <li>只用三件套也能交付小型宣传站。</li>
+                            <li>熟悉“找元素→改样式→绑事件”，学框架更轻松。</li>
+                            <li>接单流程：先搭静态版确认，再按需接入后端或框架。</li>
+                        </ul>
+                    </div>
+                    <button class="nav-button" onclick="location.reload()">↻ 重新开始演示</button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="lesson-footer">
+        模版版本：v1 · 使用 course_template（HTML + CSS + JS）驱动
+    </footer>
+
+    <script src="../course_template/course-template.js"></script>
+</body>
+</html>
+
+
+
+
