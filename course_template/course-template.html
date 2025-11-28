@@ -1,0 +1,780 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>课程标题 · 互动演示</title>
+    <link rel="stylesheet" href="course-template.css">
+</head>
+<body data-theme="indigo">
+    <!-- ============================================
+         课程 PPT 模板 · 使用说明
+         ============================================
+         1. 复制此文件到对应课程目录（如 3.2/lesson_3_2_demo.html）
+         2. 修改 <title> 和 lesson-header 中的课程信息
+         3. 根据教案内容，复制下方的 Slide 模板并填充内容
+         4. 删除不需要的示例 Slide
+         5. 图片放在同目录下，使用相对路径 ./image.png
+         
+         🎨 主题配色（修改 body 的 data-theme 属性）：
+         - indigo   靛蓝（默认）- 专业稳重
+         - ocean    海洋 - 清新科技
+         - forest   森林 - 自然舒适
+         - sunset   日落 - 活力温暖
+         - rose     玫瑰 - 柔和优雅
+         - midnight 深夜 - 深色护眼
+         - mono     单色 - 极简黑白
+         
+         右下角🎨按钮可动态切换，或直接修改 data-theme 固定主题
+         ============================================ -->
+
+    <header class="lesson-header">
+        <div class="lesson-meta">
+            <span class="lesson-tag">Module X · Demo</span>
+            <h1 class="lesson-title">课程标题</h1>
+        </div>
+        <div class="lesson-nav">
+            <button class="nav-button" data-action="prev">上一页</button>
+            <div class="progress-meta">
+                <div class="progress-count">
+                    <span data-current>1</span>
+                    <span>/</span>
+                    <span data-total>1</span>
+                </div>
+                <div class="progress-track">
+                    <div class="progress-indicator"></div>
+                </div>
+            </div>
+            <button class="nav-button" data-action="next">下一页</button>
+        </div>
+    </header>
+
+    <main class="slides">
+
+        <!-- =============================================
+             SLIDE 类型 1：封面/标题页 (layout-center + hero-card)
+             适用：课程开场、章节封面
+             ============================================= -->
+        <section class="slide is-active">
+            <div class="layout-center">
+                <div class="hero-card">
+                    <p class="pill">Lesson X.X</p>
+                    <h1>课程主标题</h1>
+                    <p class="subheading">用一句话概括本节内容的核心价值</p>
+                    <div class="card-grid">
+                        <div class="concept-card">
+                            <h3>🎯 本节目标</h3>
+                            <ul>
+                                <li>目标一：理解 XXX 概念</li>
+                                <li>目标二：掌握 YYY 操作</li>
+                                <li>目标三：能独立完成 ZZZ</li>
+                            </ul>
+                        </div>
+                        <div class="concept-card">
+                            <h3>🧠 记忆锚点</h3>
+                            <ul>
+                                <li>口诀或类比一</li>
+                                <li>口诀或类比二</li>
+                            </ul>
+                        </div>
+                        <div class="concept-card">
+                            <h3>📚 带着情境听课</h3>
+                            <p>想象自己是……（创建代入感的场景描述）</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- =============================================
+             SLIDE 类型 2：概念讲解页 (layout-center + panel)
+             适用：理论知识、概念解释
+             ============================================= -->
+        <section class="slide">
+            <div class="layout-center">
+                <div class="panel">
+                    <h2>概念标题：核心知识点</h2>
+                    <div class="concept-card">
+                        <h3>🏠 生活类比</h3>
+                        <p>把这个概念想成……（用生活场景类比，降低理解门槛）</p>
+                    </div>
+                    <div class="card-grid">
+                        <div class="concept-card">
+                            <h3>要点一</h3>
+                            <p>详细解释内容</p>
+                        </div>
+                        <div class="concept-card">
+                            <h3>要点二</h3>
+                            <p>详细解释内容</p>
+                        </div>
+                        <div class="concept-card">
+                            <h3>要点三</h3>
+                            <p>详细解释内容</p>
+                        </div>
+                    </div>
+                    <blockquote class="blockquote">一句话总结或金句</blockquote>
+                    <p class="hint">👉 下一页：预告下一节内容</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- =============================================
+             SLIDE 类型 3：分栏布局 (layout-split)
+             适用：左讲解 + 右实操、对比展示
+             ============================================= -->
+        <section class="slide">
+            <div class="layout-split">
+                <div class="panel">
+                    <h2>左栏：讲解区</h2>
+                    <div class="concept-card">
+                        <h3>核心概念</h3>
+                        <ul>
+                            <li>要点一</li>
+                            <li>要点二</li>
+                            <li>要点三</li>
+                        </ul>
+                    </div>
+                    <blockquote class="blockquote">重要提示或类比</blockquote>
+                </div>
+                <div class="panel">
+                    <h2>右栏：补充/对比</h2>
+                    <div class="card-grid">
+                        <div class="concept-card">
+                            <h3>场景 A</h3>
+                            <p>说明内容</p>
+                        </div>
+                        <div class="concept-card">
+                            <h3>场景 B</h3>
+                            <p>说明内容</p>
+                        </div>
+                    </div>
+                    <p class="hint">👉 下一页预告</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- =============================================
+             SLIDE 类型 4：时间线/流程页 (timeline)
+             适用：步骤讲解、流程梳理
+             ============================================= -->
+        <section class="slide">
+            <div class="layout-center">
+                <div class="panel">
+                    <h2>流程标题：N 步走</h2>
+                    <div class="timeline">
+                        <div class="timeline-item">
+                            <div class="timeline-bullet"></div>
+                            <div class="timeline-content">
+                                <h4>1. 第一步</h4>
+                                <p>步骤描述和关键点</p>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-bullet"></div>
+                            <div class="timeline-content">
+                                <h4>2. 第二步</h4>
+                                <p>步骤描述和关键点</p>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-bullet"></div>
+                            <div class="timeline-content">
+                                <h4>3. 第三步</h4>
+                                <p>步骤描述和关键点</p>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-bullet"></div>
+                            <div class="timeline-content">
+                                <h4>4. 第四步</h4>
+                                <p>步骤描述和关键点</p>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="hint">任何异常都在这条链上定位。</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- =============================================
+             SLIDE 类型 5：代码展示页 (code-block)
+             适用：代码示例、命令讲解
+             ============================================= -->
+        <section class="slide">
+            <div class="layout-split">
+                <div class="panel">
+                    <h2>代码示例标题</h2>
+                    <div class="concept-card">
+                        <h3>💡 关键点</h3>
+                        <ul>
+                            <li>第一行做了什么</li>
+                            <li>第二行做了什么</li>
+                            <li>注意事项</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="panel">
+                    <h2>示例代码</h2>
+                    <div class="code-block">
+<pre>
+# 这是示例代码
+command --option value
+another_command
+
+# 带注释的命令
+final_command --flag
+</pre>
+                    </div>
+                    <p class="hint">复制上述命令到终端执行</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- =============================================
+             SLIDE 类型 6：交互实验室 (lab) - 自动运行模式
+             适用：HTML/CSS 实时预览
+             ============================================= -->
+        <section class="slide">
+            <div class="layout-split">
+                <div class="panel">
+                    <h2>实验室：实时预览</h2>
+                    <div class="task-card">
+                        <h3>📝 课堂任务</h3>
+                        <ol>
+                            <li>修改 XXX</li>
+                            <li>添加 YYY</li>
+                            <li>观察变化</li>
+                        </ol>
+                    </div>
+                    <blockquote class="blockquote">修改代码后预览会自动更新</blockquote>
+                </div>
+                <div class="panel soft">
+                    <div class="lab" data-lab="demo-auto" data-auto-run="input">
+                        <div class="lab-tabs">
+                            <button class="lab-tab is-active" data-lang="html">HTML</button>
+                            <button class="lab-tab" data-lang="css">CSS</button>
+                        </div>
+                        <div class="lab-editors">
+                            <textarea data-lang="html" class="is-active">
+<div class="demo-box">
+    <h2>标题</h2>
+    <p>段落内容</p>
+    <button>按钮</button>
+</div>
+                            </textarea>
+                            <textarea data-lang="css">
+.demo-box {
+    padding: 20px;
+    background: #f8fafc;
+    border-radius: 8px;
+    font-family: sans-serif;
+}
+h2 { color: #6366f1; }
+button {
+    background: #6366f1;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+                            </textarea>
+                        </div>
+                        <div class="lab-preview">
+                            <div class="lab-preview__header">
+                                <span>实时预览</span>
+                            </div>
+                            <iframe title="Lab Preview"></iframe>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- =============================================
+             SLIDE 类型 7：交互实验室 (lab) - 手动运行模式
+             适用：包含 JS 的代码，需要点击运行
+             ============================================= -->
+        <section class="slide">
+            <div class="layout-split">
+                <div class="panel">
+                    <h2>实验室：手动运行</h2>
+                    <div class="task-card">
+                        <h3>📝 课堂任务</h3>
+                        <ol>
+                            <li>阅读 JS 代码</li>
+                            <li>修改 alert 内容</li>
+                            <li>点击"运行代码"测试</li>
+                        </ol>
+                    </div>
+                    <blockquote class="blockquote">修改 JS 后需点击"运行代码"按钮</blockquote>
+                </div>
+                <div class="panel soft">
+                    <div class="lab" data-lab="demo-manual">
+                        <div class="lab-tabs">
+                            <button class="lab-tab" data-lang="html">HTML</button>
+                            <button class="lab-tab" data-lang="css">CSS</button>
+                            <button class="lab-tab is-active" data-lang="js">JS</button>
+                        </div>
+                        <div class="lab-editors">
+                            <textarea data-lang="html">
+<div class="card">
+    <h2>交互卡片</h2>
+    <button id="btn">点击我</button>
+    <p id="output"></p>
+</div>
+                            </textarea>
+                            <textarea data-lang="css">
+.card {
+    padding: 20px;
+    text-align: center;
+    font-family: sans-serif;
+}
+button {
+    background: #10b981;
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 16px;
+}
+#output {
+    margin-top: 16px;
+    color: #6366f1;
+    font-weight: bold;
+}
+                            </textarea>
+                            <textarea data-lang="js" class="is-active">
+var btn = document.querySelector('#btn');
+var output = document.querySelector('#output');
+
+btn.addEventListener('click', function() {
+    alert('Hello World!');
+    output.textContent = '按钮被点击了！';
+});
+                            </textarea>
+                        </div>
+                        <div class="lab-preview">
+                            <div class="lab-preview__header">
+                                <span>预览（点击运行）</span>
+                                <button class="lab-run" data-action="run">▶ 运行代码</button>
+                            </div>
+                            <iframe title="JS Lab Preview"></iframe>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- =============================================
+             SLIDE 类型 8：选择题测验 (quiz-select)
+             适用：单选题、排序题
+             ============================================= -->
+        <section class="slide">
+            <div class="layout-center">
+                <div class="panel">
+                    <h2>课堂小测</h2>
+                    <div class="task-card" data-quiz="sample-mcq">
+                        <p>独立作答后点"提交测验"，系统会提示需要复查的题目。</p>
+                        <div class="quiz-question">
+                            <label>1) 问题一的描述
+                                <select data-question="1">
+                                    <option value="">请选择</option>
+                                    <option value="A">A. 选项一</option>
+                                    <option value="B">B. 选项二</option>
+                                    <option value="C">C. 选项三</option>
+                                    <option value="D">D. 选项四</option>
+                                </select>
+                            </label>
+                        </div>
+                        <div class="quiz-question">
+                            <label>2) 问题二的描述
+                                <select data-question="2">
+                                    <option value="">请选择</option>
+                                    <option value="A">A. 选项一</option>
+                                    <option value="B">B. 选项二</option>
+                                    <option value="C">C. 选项三</option>
+                                    <option value="D">D. 选项四</option>
+                                </select>
+                            </label>
+                        </div>
+                        <button class="nav-button quiz-check" type="button">提交测验</button>
+                        <p class="quiz-result" aria-live="polite"></p>
+                        <p class="hint">若显示需要复查的题号，可返回对应章节重新学习。</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- =============================================
+             SLIDE 类型 9：多选题/复选框测验 (quiz-checkbox)
+             适用：多选题
+             ============================================= -->
+        <section class="slide">
+            <div class="layout-split">
+                <div class="panel">
+                    <h2>多选练习</h2>
+                    <p>根据所学内容，勾选所有正确的选项。</p>
+                </div>
+                <div class="panel">
+                    <div class="task-card" data-quiz="sample-checkbox">
+                        <h3>题目：以下哪些说法正确？</h3>
+                        <div class="quiz-options">
+                            <label class="quiz-option">
+                                <input type="checkbox" data-option="A">
+                                <span>A. 选项一的描述</span>
+                            </label>
+                            <label class="quiz-option">
+                                <input type="checkbox" data-option="B">
+                                <span>B. 选项二的描述</span>
+                            </label>
+                            <label class="quiz-option">
+                                <input type="checkbox" data-option="C">
+                                <span>C. 选项三的描述</span>
+                            </label>
+                            <label class="quiz-option">
+                                <input type="checkbox" data-option="D">
+                                <span>D. 选项四的描述</span>
+                            </label>
+                        </div>
+                        <button class="nav-button quiz-check" type="button">检查答案</button>
+                        <p class="quiz-result" aria-live="polite"></p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- =============================================
+             SLIDE 类型 10：填空/输入题 (quiz-input)
+             适用：命令填写、代码补全
+             注意：placeholder 不要泄露答案！
+             ============================================= -->
+        <section class="slide">
+            <div class="layout-split">
+                <div class="panel">
+                    <h2>命令填写练习</h2>
+                    <p>根据所学，填写正确的命令。</p>
+                    <div class="concept-card">
+                        <h3>提示</h3>
+                        <ul>
+                            <li>参考第 X 页的流程</li>
+                            <li>注意命令格式</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="panel">
+                    <div class="task-card" data-quiz="sample-input">
+                        <h3>填写命令</h3>
+                        <div class="quiz-inputs">
+                            <label class="quiz-input-label">
+                                <span>步骤 1：</span>
+                                <input type="text" data-step="1" placeholder="查看当前状态">
+                                <span class="quiz-status"></span>
+                                <span class="quiz-answer">git status</span>
+                            </label>
+                            <label class="quiz-input-label">
+                                <span>步骤 2：</span>
+                                <input type="text" data-step="2" placeholder="暂存改动">
+                                <span class="quiz-status"></span>
+                                <span class="quiz-answer">git add</span>
+                            </label>
+                            <label class="quiz-input-label">
+                                <span>步骤 3：</span>
+                                <input type="text" data-step="3" placeholder="提交版本">
+                                <span class="quiz-status"></span>
+                                <span class="quiz-answer">git commit</span>
+                            </label>
+                        </div>
+                        <button class="nav-button quiz-check" type="button">验证答案</button>
+                        <button type="button" class="quiz-answer-toggle">👁 显示/隐藏参考答案</button>
+                        <p class="quiz-result" aria-live="polite"></p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- =============================================
+             SLIDE 类型 11：点击揭示 (reveal)
+             适用：先思考再看答案
+             ============================================= -->
+        <section class="slide">
+            <div class="layout-center">
+                <div class="panel">
+                    <h2>思考与揭示</h2>
+                    <div class="concept-card">
+                        <h3>🤔 思考题</h3>
+                        <p>这里是问题描述，先独立思考，再点击下方查看参考答案。</p>
+                    </div>
+                    <div class="reveal-group">
+                        <button class="reveal-trigger" data-reveal="answer1">💡 点击查看答案</button>
+                        <div class="reveal-content" id="answer1">
+                            <div class="concept-card">
+                                <h3>参考答案</h3>
+                                <p>这里是答案内容，点击后才会显示。</p>
+                                <ul>
+                                    <li>要点一</li>
+                                    <li>要点二</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="reveal-group">
+                        <button class="reveal-trigger" data-reveal="hint1">🔍 点击查看提示</button>
+                        <div class="reveal-content" id="hint1">
+                            <p class="hint">提示内容：考虑 XXX 方面……</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- =============================================
+             SLIDE 类型 12：作业/任务页 (task-card)
+             适用：课后作业、实操任务
+             ============================================= -->
+        <section class="slide">
+            <div class="layout-center">
+                <div class="panel">
+                    <h2>课堂练习与作业</h2>
+                    <div class="card-grid">
+                        <div class="concept-card">
+                            <h3>任务 1 · 基础练习</h3>
+                            <ul>
+                                <li>步骤一描述</li>
+                                <li>步骤二描述</li>
+                                <li>交付物说明</li>
+                            </ul>
+                        </div>
+                        <div class="concept-card">
+                            <h3>任务 2 · 进阶练习</h3>
+                            <ul>
+                                <li>步骤一描述</li>
+                                <li>步骤二描述</li>
+                                <li>交付物说明</li>
+                            </ul>
+                        </div>
+                        <div class="concept-card">
+                            <h3>任务 3 · 挑战任务</h3>
+                            <ul>
+                                <li>步骤一描述</li>
+                                <li>步骤二描述</li>
+                                <li>交付物说明</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <blockquote class="blockquote">交付格式：XXX 链接 + 截图 + 心得反思</blockquote>
+                </div>
+            </div>
+        </section>
+
+        <!-- =============================================
+             SLIDE 类型 13：总结页 (summary)
+             适用：章节总结、课程回顾
+             ============================================= -->
+        <section class="slide">
+            <div class="layout-center">
+                <div class="panel">
+                    <h2>本节总结</h2>
+                    <ul class="summary-list">
+                        <li>✅ 掌握了 XXX 概念</li>
+                        <li>✅ 学会了 YYY 操作</li>
+                        <li>✅ 理解了 ZZZ 原理</li>
+                    </ul>
+                    <div class="card-grid">
+                        <div class="concept-card">
+                            <h3>🚀 下一节预告</h3>
+                            <p>预告下一节内容，建立期待感。</p>
+                        </div>
+                        <div class="concept-card">
+                            <h3>🌏 现实价值</h3>
+                            <ul>
+                                <li>应用场景一</li>
+                                <li>应用场景二</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <button class="nav-button" onclick="location.reload()">↻ 重新开始演示</button>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="lesson-footer">
+        模版版本：v2 · 统一使用 demos/course_template 提供的样式与脚本
+    </footer>
+
+    <script src="course-template.js"></script>
+    <!-- 
+        ============================================
+        自定义 Quiz 逻辑示例（带标红 + 答案切换）
+        ============================================
+        - 错误时在对应题目旁边标红
+        - 支持显示/隐藏参考答案
+        - 不在 placeholder 中泄露答案
+    -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // 示例：单选题验证
+            initSampleMcq();
+            // 示例：多选题验证
+            initSampleCheckbox();
+            // 示例：填空题验证
+            initSampleInput();
+            // 初始化答案切换按钮
+            initAnswerToggles();
+        });
+
+        // 初始化所有答案切换按钮
+        function initAnswerToggles() {
+            document.querySelectorAll('.quiz-answer-toggle').forEach(toggle => {
+                toggle.addEventListener('click', () => {
+                    const container = toggle.closest('.task-card, .concept-card');
+                    const answers = container?.querySelectorAll('.quiz-answer');
+                    const isShowing = toggle.classList.toggle('is-showing');
+                    answers?.forEach(a => a.classList.toggle('is-visible', isShowing));
+                });
+            });
+        }
+
+        // 单选题示例（带标红）
+        function initSampleMcq() {
+            const container = document.querySelector('[data-quiz="sample-mcq"]');
+            if (!container) return;
+            const button = container.querySelector('.quiz-check');
+            const selects = container.querySelectorAll('select[data-question]');
+            const result = container.querySelector('.quiz-result');
+            // 正确答案映射（不要在页面上显示）
+            const answers = { '1': 'B', '2': 'A' };
+
+            button?.addEventListener('click', () => {
+                const blanks = [];
+                let correctCount = 0;
+                
+                selects.forEach((select) => {
+                    const qid = select.dataset.question;
+                    select.classList.remove('quiz-wrong', 'quiz-correct');
+                    
+                    if (!select.value) {
+                        blanks.push(qid);
+                    } else {
+                        const isCorrect = select.value === answers[qid];
+                        select.classList.add(isCorrect ? 'quiz-correct' : 'quiz-wrong');
+                        if (isCorrect) correctCount++;
+                    }
+                });
+                
+                if (blanks.length) {
+                    result.textContent = '请先完成所有题目（未作答：' + blanks.join(', ') + '）';
+                    result.style.color = '#b45309';
+                    return;
+                }
+                
+                const total = selects.length;
+                if (correctCount === total) {
+                    result.textContent = '🎉 全部正确！';
+                    result.style.color = '#059669';
+                } else {
+                    result.textContent = `得分：${correctCount}/${total}，请检查标红的题目。`;
+                    result.style.color = '#b45309';
+                }
+            });
+        }
+
+        // 多选题示例（带标红）
+        function initSampleCheckbox() {
+            const container = document.querySelector('[data-quiz="sample-checkbox"]');
+            if (!container) return;
+            const button = container.querySelector('.quiz-check');
+            const checkboxes = container.querySelectorAll('input[type="checkbox"][data-option]');
+            const result = container.querySelector('.quiz-result');
+            // 正确选项（不要在页面上显示）
+            const correctOptions = ['A', 'C'];
+
+            button?.addEventListener('click', () => {
+                const chosen = Array.from(checkboxes)
+                    .filter((cb) => cb.checked)
+                    .map((cb) => cb.dataset.option);
+                
+                // 标记每个选项
+                checkboxes.forEach(cb => {
+                    const opt = cb.dataset.option;
+                    const shouldCheck = correctOptions.includes(opt);
+                    const isChecked = cb.checked;
+                    const label = cb.closest('.quiz-option') || cb.parentElement;
+                    label?.classList.remove('quiz-wrong', 'quiz-correct');
+                    if (isChecked === shouldCheck) {
+                        if (isChecked) label?.classList.add('quiz-correct');
+                    } else {
+                        label?.classList.add('quiz-wrong');
+                    }
+                });
+                
+                const missing = correctOptions.filter((opt) => !chosen.includes(opt));
+                const extras = chosen.filter((opt) => !correctOptions.includes(opt));
+                
+                if (!missing.length && !extras.length) {
+                    result.textContent = '🎉 完全正确！';
+                    result.style.color = '#059669';
+                } else {
+                    result.textContent = '请检查标红的选项。';
+                    result.style.color = '#b45309';
+                }
+            });
+        }
+
+        // 填空题示例（带标红 + 状态标记）
+        function initSampleInput() {
+            const container = document.querySelector('[data-quiz="sample-input"]');
+            if (!container) return;
+            const button = container.querySelector('.quiz-check');
+            const inputs = container.querySelectorAll('input[data-step]');
+            const result = container.querySelector('.quiz-result');
+            // 答案关键词检测（不在 placeholder 显示）
+            const keywords = {
+                '1': 'git status',
+                '2': 'git add',
+                '3': 'git commit'
+            };
+
+            button?.addEventListener('click', () => {
+                let correctCount = 0;
+                
+                inputs.forEach((input) => {
+                    const step = input.dataset.step;
+                    const value = (input.value || '').trim().toLowerCase();
+                    const isCorrect = value.includes(keywords[step]);
+                    
+                    // 清除旧状态
+                    input.classList.remove('quiz-wrong', 'quiz-correct');
+                    const status = input.parentElement?.querySelector('.quiz-status');
+                    
+                    if (value) {
+                        input.classList.add(isCorrect ? 'quiz-correct' : 'quiz-wrong');
+                        if (status) {
+                            status.classList.add('is-visible');
+                            status.classList.remove('is-wrong', 'is-correct');
+                            status.classList.add(isCorrect ? 'is-correct' : 'is-wrong');
+                            status.textContent = isCorrect ? '✓' : '✗';
+                        }
+                        if (isCorrect) correctCount++;
+                    } else {
+                        if (status) status.classList.remove('is-visible');
+                    }
+                });
+                
+                const total = inputs.length;
+                if (correctCount === total) {
+                    result.textContent = '🎉 所有命令正确！';
+                    result.style.color = '#059669';
+                } else {
+                    result.textContent = `得分：${correctCount}/${total}，请检查标红的步骤。`;
+                    result.style.color = '#b45309';
+                }
+            });
+        }
+    </script>
+</body>
+</html>
+
