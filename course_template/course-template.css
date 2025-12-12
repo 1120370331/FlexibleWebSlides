@@ -1079,3 +1079,163 @@ label.quiz-option.quiz-correct {
     }
 }
 
+/* ============================================
+   ENHANCED CODE BLOCK - VS Code Style
+   ============================================
+   Usage:
+   <div class="code-enhanced">
+       <div class="code-header">
+           <div class="dots">
+               <span class="dot red"></span>
+               <span class="dot yellow"></span>
+               <span class="dot green"></span>
+           </div>
+           <span class="filename">filename.py</span>
+           <button class="copy-btn" onclick="copyCode(this)">复制</button>
+       </div>
+       <div class="code-body">
+           <pre>your code here</pre>
+       </div>
+   </div>
+   ============================================ */
+
+.code-enhanced {
+    background: #1e1e1e;
+    border-radius: 8px;
+    overflow: hidden;
+    margin: 1rem 0;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+.code-enhanced .code-header {
+    background: #323233;
+    padding: 8px 16px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid #404040;
+}
+
+.code-enhanced .code-header .dots {
+    display: flex;
+    gap: 6px;
+}
+
+.code-enhanced .code-header .dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+}
+
+.code-enhanced .code-header .dot.red { background: #ff5f56; }
+.code-enhanced .code-header .dot.yellow { background: #ffbd2e; }
+.code-enhanced .code-header .dot.green { background: #27ca40; }
+
+.code-enhanced .code-header .filename {
+    color: #9d9d9d;
+    font-size: 13px;
+    font-family: 'JetBrains Mono', 'Fira Code', monospace;
+}
+
+.code-enhanced .code-header .copy-btn {
+    background: #404040;
+    border: none;
+    color: #9d9d9d;
+    padding: 4px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 12px;
+    transition: all 0.2s;
+}
+
+.code-enhanced .code-header .copy-btn:hover {
+    background: #505050;
+    color: #fff;
+}
+
+.code-enhanced .code-body {
+    padding: 16px;
+    overflow-x: auto;
+}
+
+.code-enhanced pre {
+    margin: 0;
+    font-family: 'JetBrains Mono', 'Fira Code', 'Consolas', monospace;
+    font-size: 14px;
+    line-height: 1.6;
+    color: #d4d4d4;
+    white-space: pre;
+    background: transparent;
+}
+
+/* Syntax Highlighting Classes */
+.code-enhanced .keyword { color: #569cd6; }
+.code-enhanced .string { color: #ce9178; }
+.code-enhanced .comment { color: #6a9955; }
+.code-enhanced .function { color: #dcdcaa; }
+.code-enhanced .number { color: #b5cea8; }
+.code-enhanced .decorator { color: #d7ba7d; }
+.code-enhanced .class-name { color: #4ec9b0; }
+.code-enhanced .operator { color: #d4d4d4; }
+.code-enhanced .property { color: #9cdcfe; }
+
+/* ============================================
+   HOMEWORK CARD COMPONENT
+   ============================================ */
+
+.homework-card {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 24px;
+    border-radius: 12px;
+    margin-bottom: 16px;
+}
+
+.homework-card h3 {
+    margin: 0 0 12px 0;
+    font-size: 20px;
+}
+
+.homework-card .difficulty {
+    display: inline-block;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    margin-bottom: 12px;
+}
+
+.homework-card .difficulty.easy { background: rgba(39, 202, 64, 0.3); }
+.homework-card .difficulty.medium { background: rgba(255, 189, 46, 0.3); }
+.homework-card .difficulty.hard { background: rgba(255, 95, 86, 0.3); }
+
+/* ============================================
+   SUBMIT CHECKLIST COMPONENT
+   ============================================ */
+
+.submit-checklist {
+    background: #f8fafc;
+    border: 2px dashed #cbd5e1;
+    border-radius: 8px;
+    padding: 16px;
+}
+
+.submit-checklist h4 {
+    margin: 0 0 12px 0;
+    color: #475569;
+}
+
+.submit-checklist label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 0;
+    cursor: pointer;
+    color: var(--text-main);
+}
+
+.submit-checklist input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    accent-color: var(--accent);
+}
+
