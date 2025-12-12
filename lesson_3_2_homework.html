@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3.2 课后作业 · 后端接口详解与实践</title>
+    <link rel="stylesheet" href="course_template/course-template.css">
+    <style>
+        /* 增强代码块样式 - 类似 VS Code / GitHub 风格 */
+        .code-enhanced {
+            background: #1e1e1e;
+            border-radius: 8px;
+            overflow: hidden;
+            margin: 1rem 0;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+        .code-enhanced .code-header {
+            background: #323233;
+            padding: 8px 16px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid #404040;
+        }
+        .code-enhanced .code-header .dots {
+            display: flex;
+            gap: 6px;
+        }
+        .code-enhanced .code-header .dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+        .code-enhanced .code-header .dot.red { background: #ff5f56; }
+        .code-enhanced .code-header .dot.yellow { background: #ffbd2e; }
+        .code-enhanced .code-header .dot.green { background: #27ca40; }
+        .code-enhanced .code-header .filename {
+            color: #9d9d9d;
+            font-size: 13px;
+            font-family: 'JetBrains Mono', 'Fira Code', monospace;
+        }
+        .code-enhanced .code-header .copy-btn {
+            background: #404040;
+            border: none;
+            color: #9d9d9d;
+            padding: 4px 12px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 12px;
+            transition: all 0.2s;
+        }
+        .code-enhanced .code-header .copy-btn:hover {
+            background: #505050;
+            color: #fff;
+        }
+        .code-enhanced .code-body {
+            padding: 16px;
+            overflow-x: auto;
+        }
+        .code-enhanced pre {
+            margin: 0;
+            font-family: 'JetBrains Mono', 'Fira Code', 'Consolas', monospace;
+            font-size: 14px;
+            line-height: 1.6;
+            color: #d4d4d4;
+        }
+        .code-enhanced .line-numbers {
+            display: inline-block;
+            text-align: right;
+            padding-right: 16px;
+            margin-right: 16px;
+            border-right: 1px solid #404040;
+            color: #6e7681;
+            user-select: none;
+        }
+        /* 语法高亮 */
+        .code-enhanced .keyword { color: #569cd6; }
+        .code-enhanced .string { color: #ce9178; }
+        .code-enhanced .comment { color: #6a9955; }
+        .code-enhanced .function { color: #dcdcaa; }
+        .code-enhanced .number { color: #b5cea8; }
+        .code-enhanced .decorator { color: #d7ba7d; }
+        .code-enhanced .class-name { color: #4ec9b0; }
+
+        /* 作业卡片增强 */
+        .homework-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 24px;
+            border-radius: 12px;
+            margin-bottom: 16px;
+        }
+        .homework-card h3 {
+            margin: 0 0 12px 0;
+            font-size: 20px;
+        }
+        .homework-card .difficulty {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            margin-bottom: 12px;
+        }
+        .homework-card .difficulty.easy { background: rgba(39, 202, 64, 0.3); }
+        .homework-card .difficulty.medium { background: rgba(255, 189, 46, 0.3); }
+        .homework-card .difficulty.hard { background: rgba(255, 95, 86, 0.3); }
+
+        /* 提交清单 */
+        .submit-checklist {
+            background: #f8fafc;
+            border: 2px dashed #cbd5e1;
+            border-radius: 8px;
+            padding: 16px;
+        }
+        .submit-checklist h4 {
+            margin: 0 0 12px 0;
+            color: #475569;
+        }
+        .submit-checklist label {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 0;
+            cursor: pointer;
+        }
+        .submit-checklist input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+        }
+    </style>
+</head>
+<body data-theme="sunset">
+
+    <header class="lesson-header">
+        <div class="lesson-meta">
+            <span class="lesson-tag">Homework 3.2</span>
+            <h1 class="lesson-title">课后作业</h1>
+        </div>
+        <div class="lesson-nav">
+            <button class="nav-button" data-action="prev">上一页</button>
+            <div class="progress-meta">
+                <div class="progress-count">
+                    <span data-current>1</span>
+                    <span>/</span>
+                    <span data-total>1</span>
+                </div>
+                <div class="progress-track">
+                    <div class="progress-indicator"></div>
+                </div>
+            </div>
+            <button class="nav-button" data-action="next">下一页</button>
+        </div>
+    </header>
+
+    <main class="slides">
+
+        <!-- ===================== SLIDE 1: 作业概览 ===================== -->
+        <section class="slide is-active">
+            <div class="layout-center">
+                <div class="hero-card">
+                    <p class="pill">3.2 课后作业</p>
+                    <h1>后端接口实战练习</h1>
+                    <p class="subheading">完成以下作业，巩固接口开发技能</p>
+                    <div class="card-grid">
+                        <div class="homework-card">
+                            <span class="difficulty easy">⭐ 基础</span>
+                            <h3>作业 1：完成登录接口</h3>
+                            <p>补全 views.py 中的 TODO，实现登录功能</p>
+                        </div>
+                        <div class="homework-card" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">
+                            <span class="difficulty medium">⭐⭐ 进阶</span>
+                            <h3>作业 2：实现注册接口</h3>
+                            <p>设计并实现用户注册功能</p>
+                        </div>
+                        <div class="homework-card" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);">
+                            <span class="difficulty hard">⭐⭐⭐ 挑战</span>
+                            <h3>作业 3：接口评审</h3>
+                            <p>评审同学的代码，提出改进建议</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===================== SLIDE 2: 作业1 详情 ===================== -->
+        <section class="slide">
+            <div class="layout-split">
+                <div class="panel">
+                    <h2>作业 1：完成登录接口</h2>
+                    <div class="concept-card">
+                        <h3>📋 任务要求</h3>
+                        <ul>
+                            <li>打开 <code>demo_project/accounts/views.py</code></li>
+                            <li>找到所有 <code># TODO:</code> 注释</li>
+                            <li>按照注释提示完成代码</li>
+                            <li>运行测试验证实现</li>
+                        </ul>
+                    </div>
+                    <div class="concept-card">
+                        <h3>✅ 验收标准</h3>
+                        <ul>
+                            <li>所有测试通过</li>
+                            <li>登录成功返回 token</li>
+                            <li>错误情况返回正确状态码</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="panel">
+                    <h2>需要实现的功能</h2>
+                    <div class="code-enhanced">
+                        <div class="code-header">
+                            <div class="dots">
+                                <span class="dot red"></span>
+                                <span class="dot yellow"></span>
+                                <span class="dot green"></span>
+                            </div>
+                            <span class="filename">views.py</span>
+                            <button class="copy-btn" onclick="copyCode(this)">复制</button>
+                        </div>
+                        <div class="code-body">
+<pre><span class="comment"># TODO: 请实现参数校验</span>
+<span class="keyword">if</span> <span class="keyword">not</span> username <span class="keyword">or</span> <span class="keyword">not</span> password:
+    <span class="keyword">return</span> <span class="function">JsonResponse</span>({
+        <span class="string">'code'</span>: <span class="number">400</span>,
+        <span class="string">'message'</span>: <span class="string">'缺少必填参数'</span>
+    }, status=<span class="number">400</span>)
+
+<span class="comment"># TODO: 请实现用户存在性检查</span>
+<span class="keyword">if</span> <span class="keyword">not</span> <span class="class-name">User</span>.objects.<span class="function">filter</span>(
+    username=username
+).<span class="function">exists</span>():
+    <span class="keyword">return</span> <span class="function">JsonResponse</span>({...})</pre>
+                        </div>
+                    </div>
+                    <p class="hint">📂 参考答案：views_solution.py</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===================== SLIDE 3: 运行测试 ===================== -->
+        <section class="slide">
+            <div class="layout-center">
+                <div class="panel">
+                    <h2>验证你的实现</h2>
+                    <div class="code-enhanced">
+                        <div class="code-header">
+                            <div class="dots">
+                                <span class="dot red"></span>
+                                <span class="dot yellow"></span>
+                                <span class="dot green"></span>
+                            </div>
+                            <span class="filename">Terminal</span>
+                            <button class="copy-btn" onclick="copyCode(this)">复制</button>
+                        </div>
+                        <div class="code-body">
+<pre><span class="comment"># 进入项目目录</span>
+<span class="keyword">cd</span> demo_project
+
+<span class="comment"># 运行所有测试</span>
+python manage.py <span class="function">test</span> accounts
+
+<span class="comment"># 期望输出：</span>
+<span class="string">Creating test database...</span>
+<span class="string">.......................</span>
+<span class="string">----------------------------------------------------------------------</span>
+<span class="string">Ran 20 tests in 0.XXXs</span>
+<span class="string">OK</span></pre>
+                        </div>
+                    </div>
+                    <div class="card-grid">
+                        <div class="concept-card">
+                            <h3>🔴 测试失败？</h3>
+                            <p>检查错误信息，对照 TODO 注释修改代码</p>
+                        </div>
+                        <div class="concept-card">
+                            <h3>🟢 测试通过？</h3>
+                            <p>恭喜！继续完成作业 2</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===================== SLIDE 4: 作业2 详情 ===================== -->
+        <section class="slide">
+            <div class="layout-split">
+                <div class="panel">
+                    <h2>作业 2：实现注册接口</h2>
+                    <div class="concept-card">
+                        <h3>📋 接口设计</h3>
+                        <ul>
+                            <li><strong>URL:</strong> POST /api/register/</li>
+                            <li><strong>参数:</strong> username, password, email</li>
+                            <li><strong>成功:</strong> 201 + 用户信息</li>
+                            <li><strong>用户名已存在:</strong> 409</li>
+                            <li><strong>参数错误:</strong> 400</li>
+                        </ul>
+                    </div>
+                    <div class="task-card">
+                        <h3>📝 步骤</h3>
+                        <ol>
+                            <li>先写接口文档</li>
+                            <li>用 AI 辅助生成代码</li>
+                            <li>补充测试用例</li>
+                            <li>运行测试验证</li>
+                        </ol>
+                    </div>
+                </div>
+                <div class="panel">
+                    <h2>参考代码结构</h2>
+                    <div class="code-enhanced">
+                        <div class="code-header">
+                            <div class="dots">
+                                <span class="dot red"></span>
+                                <span class="dot yellow"></span>
+                                <span class="dot green"></span>
+                            </div>
+                            <span class="filename">views.py</span>
+                            <button class="copy-btn" onclick="copyCode(this)">复制</button>
+                        </div>
+                        <div class="code-body">
+<pre><span class="decorator">@csrf_exempt</span>
+<span class="keyword">def</span> <span class="function">register_view</span>(request):
+    <span class="string">"""注册接口"""</span>
+    <span class="comment"># 1. 检查请求方法</span>
+    <span class="keyword">if</span> request.method != <span class="string">'POST'</span>:
+        <span class="keyword">return</span> ...
+
+    <span class="comment"># 2. 解析 JSON</span>
+    data = json.<span class="function">loads</span>(request.body)
+
+    <span class="comment"># 3. 参数校验</span>
+    <span class="comment"># - 用户名至少 3 字符</span>
+    <span class="comment"># - 密码至少 6 字符</span>
+
+    <span class="comment"># 4. 检查用户名是否已存在</span>
+
+    <span class="comment"># 5. 创建用户</span>
+    user = <span class="class-name">User</span>.objects.<span class="function">create_user</span>(...)
+
+    <span class="comment"># 6. 返回结果</span>
+    <span class="keyword">return</span> <span class="function">JsonResponse</span>({...})</pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===================== SLIDE 5: 作业3 详情 ===================== -->
+        <section class="slide">
+            <div class="layout-center">
+                <div class="panel">
+                    <h2>作业 3：接口评审练习</h2>
+                    <div class="concept-card">
+                        <h3>📋 评审维度</h3>
+                        <div class="card-grid">
+                            <div class="concept-card">
+                                <h3>✅ 正确性</h3>
+                                <p>功能是否符合预期？</p>
+                            </div>
+                            <div class="concept-card">
+                                <h3>🛡️ 稳定性</h3>
+                                <p>异常输入会崩溃吗？</p>
+                            </div>
+                            <div class="concept-card">
+                                <h3>🔒 安全性</h3>
+                                <p>有越权风险吗？</p>
+                            </div>
+                            <div class="concept-card">
+                                <h3>📖 易用性</h3>
+                                <p>错误提示清晰吗？</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="task-card">
+                        <h3>📝 评审报告模板</h3>
+                        <ol>
+                            <li>被评审接口：XXX</li>
+                            <li>发现的问题（至少 3 条）</li>
+                            <li>改进建议</li>
+                            <li>亮点（如果有）</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===================== SLIDE 6: 提交要求 ===================== -->
+        <section class="slide">
+            <div class="layout-center">
+                <div class="panel">
+                    <h2>作业提交</h2>
+                    <div class="submit-checklist">
+                        <h4>📦 提交清单</h4>
+                        <label><input type="checkbox"> 完成的 views.py 代码</label>
+                        <label><input type="checkbox"> 测试运行截图（全部通过）</label>
+                        <label><input type="checkbox"> 与 AI 的关键对话记录</label>
+                        <label><input type="checkbox"> 接口文档（作业2）</label>
+                        <label><input type="checkbox"> 评审报告（作业3）</label>
+                    </div>
+                    <div class="card-grid">
+                        <div class="concept-card">
+                            <h3>📅 截止时间</h3>
+                            <p>下次上课前</p>
+                        </div>
+                        <div class="concept-card">
+                            <h3>📤 提交方式</h3>
+                            <p>打包为 zip 上传到课程平台</p>
+                        </div>
+                    </div>
+                    <blockquote class="blockquote">遇到问题？先尝试用 AI 解决，实在不行再问老师</blockquote>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===================== SLIDE 7: 填空练习 ===================== -->
+        <section class="slide">
+            <div class="layout-split">
+                <div class="panel">
+                    <h2>命令填写练习</h2>
+                    <p>根据所学，填写正确的命令</p>
+                    <div class="concept-card">
+                        <h3>💡 提示</h3>
+                        <ul>
+                            <li>参考课堂演示的流程</li>
+                            <li>注意命令格式</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="panel">
+                    <div class="task-card" data-quiz="cmd-quiz">
+                        <h3>填写 Django 命令</h3>
+                        <div class="quiz-inputs">
+                            <label class="quiz-input-label">
+                                <span>初始化数据库：</span>
+                                <input type="text" data-step="1" placeholder="python manage.py ???">
+                                <span class="quiz-status"></span>
+                                <span class="quiz-answer">python manage.py migrate</span>
+                            </label>
+                            <label class="quiz-input-label">
+                                <span>运行测试：</span>
+                                <input type="text" data-step="2" placeholder="python manage.py ???">
+                                <span class="quiz-status"></span>
+                                <span class="quiz-answer">python manage.py test</span>
+                            </label>
+                            <label class="quiz-input-label">
+                                <span>启动服务：</span>
+                                <input type="text" data-step="3" placeholder="python manage.py ???">
+                                <span class="quiz-status"></span>
+                                <span class="quiz-answer">python manage.py runserver</span>
+                            </label>
+                        </div>
+                        <button class="nav-button quiz-check" type="button">验证答案</button>
+                        <button type="button" class="quiz-answer-toggle">👁 显示/隐藏参考答案</button>
+                        <p class="quiz-result" aria-live="polite"></p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="lesson-footer">
+        3.2 课后作业 · AI 编程培训
+    </footer>
+
+    <script src="course_template/course-template.js"></script>
+    <script>
+        // 复制代码功能
+        function copyCode(btn) {
+            const codeBody = btn.closest('.code-enhanced').querySelector('pre');
+            const text = codeBody.textContent;
+            navigator.clipboard.writeText(text).then(() => {
+                btn.textContent = '已复制!';
+                setTimeout(() => btn.textContent = '复制', 2000);
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            initCmdQuiz();
+            initAnswerToggles();
+        });
+
+        function initAnswerToggles() {
+            document.querySelectorAll('.quiz-answer-toggle').forEach(toggle => {
+                toggle.addEventListener('click', () => {
+                    const container = toggle.closest('.task-card');
+                    const answers = container?.querySelectorAll('.quiz-answer');
+                    const isShowing = toggle.classList.toggle('is-showing');
+                    answers?.forEach(a => a.classList.toggle('is-visible', isShowing));
+                });
+            });
+        }
+
+        function initCmdQuiz() {
+            const container = document.querySelector('[data-quiz="cmd-quiz"]');
+            if (!container) return;
+            const button = container.querySelector('.quiz-check');
+            const inputs = container.querySelectorAll('input[data-step]');
+            const result = container.querySelector('.quiz-result');
+            const keywords = {
+                '1': 'migrate',
+                '2': 'test',
+                '3': 'runserver'
+            };
+
+            button?.addEventListener('click', () => {
+                let correctCount = 0;
+                inputs.forEach((input) => {
+                    const step = input.dataset.step;
+                    const value = (input.value || '').trim().toLowerCase();
+                    const isCorrect = value.includes(keywords[step]);
+
+                    input.classList.remove('quiz-wrong', 'quiz-correct');
+                    const status = input.parentElement?.querySelector('.quiz-status');
+
+                    if (value) {
+                        input.classList.add(isCorrect ? 'quiz-correct' : 'quiz-wrong');
+                        if (status) {
+                            status.classList.add('is-visible');
+                            status.classList.remove('is-wrong', 'is-correct');
+                            status.classList.add(isCorrect ? 'is-correct' : 'is-wrong');
+                            status.textContent = isCorrect ? '✓' : '✗';
+                        }
+                        if (isCorrect) correctCount++;
+                    }
+                });
+
+                const total = inputs.length;
+                if (correctCount === total) {
+                    result.textContent = '🎉 全部正确！';
+                    result.style.color = '#059669';
+                } else {
+                    result.textContent = `得分：${correctCount}/${total}`;
+                    result.style.color = '#b45309';
+                }
+            });
+        }
+    </script>
+</body>
+</html>
