@@ -23,7 +23,7 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
-
+pics/picture1.jpg
 # local env files
 .env*.local
 .env
