@@ -1,0 +1,831 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3.2 后端接口详解与实践 · 互动演示</title>
+    <link rel="stylesheet" href="course_template/course-template.css">
+    <style>
+        /* 增强代码块样式 - VS Code / GitHub 风格 */
+        .code-enhanced {
+            background: #1e1e1e;
+            border-radius: 8px;
+            overflow: hidden;
+            margin: 1rem 0;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+        .code-enhanced .code-header {
+            background: #323233;
+            padding: 8px 16px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid #404040;
+        }
+        .code-enhanced .code-header .dots {
+            display: flex;
+            gap: 6px;
+        }
+        .code-enhanced .code-header .dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+        .code-enhanced .code-header .dot.red { background: #ff5f56; }
+        .code-enhanced .code-header .dot.yellow { background: #ffbd2e; }
+        .code-enhanced .code-header .dot.green { background: #27ca40; }
+        .code-enhanced .code-header .filename {
+            color: #9d9d9d;
+            font-size: 13px;
+            font-family: 'JetBrains Mono', 'Fira Code', monospace;
+        }
+        .code-enhanced .code-header .copy-btn {
+            background: #404040;
+            border: none;
+            color: #9d9d9d;
+            padding: 4px 12px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 12px;
+            transition: all 0.2s;
+        }
+        .code-enhanced .code-header .copy-btn:hover {
+            background: #505050;
+            color: #fff;
+        }
+        .code-enhanced .code-body {
+            padding: 16px;
+            overflow-x: auto;
+        }
+        .code-enhanced pre {
+            margin: 0;
+            font-family: 'JetBrains Mono', 'Fira Code', 'Consolas', monospace;
+            font-size: 14px;
+            line-height: 1.6;
+            color: #d4d4d4;
+        }
+        /* 语法高亮 */
+        .code-enhanced .keyword { color: #569cd6; }
+        .code-enhanced .string { color: #ce9178; }
+        .code-enhanced .comment { color: #6a9955; }
+        .code-enhanced .function { color: #dcdcaa; }
+        .code-enhanced .number { color: #b5cea8; }
+        .code-enhanced .decorator { color: #d7ba7d; }
+        .code-enhanced .class-name { color: #4ec9b0; }
+    </style>
+</head>
+<body data-theme="midnight">
+
+    <header class="lesson-header">
+        <div class="lesson-meta">
+            <span class="lesson-tag">Module 3.2 · API</span>
+            <h1 class="lesson-title">后端接口详解与实践</h1>
+        </div>
+        <div class="lesson-nav">
+            <button class="nav-button" data-action="prev">上一页</button>
+            <div class="progress-meta">
+                <div class="progress-count">
+                    <span data-current>1</span>
+                    <span>/</span>
+                    <span data-total>1</span>
+                </div>
+                <div class="progress-track">
+                    <div class="progress-indicator"></div>
+                </div>
+            </div>
+            <button class="nav-button" data-action="next">下一页</button>
+        </div>
+    </header>
+
+    <main class="slides">
+
+        <!-- ===================== SLIDE 1: 封面 ===================== -->
+        <section class="slide is-active">
+            <div class="layout-center">
+                <div class="hero-card">
+                    <p class="pill">Lesson 3.2</p>
+                    <h1>后端接口详解与实践</h1>
+                    <p class="subheading">从零开始，学会用 Django 写出"好用"的 API</p>
+                    <div class="card-grid">
+                        <div class="concept-card">
+                            <h3>🎯 本节目标</h3>
+                            <ul>
+                                <li>理解接口的定义和作用</li>
+                                <li>掌握 Django 接口开发流程</li>
+                                <li>学会接口评价与测试</li>
+                                <li>实战：实现登录接口</li>
+                            </ul>
+                        </div>
+                        <div class="concept-card">
+                            <h3>🧠 记忆锚点</h3>
+                            <ul>
+                                <li>"接口是前后端的约定暗号"</li>
+                                <li>"写接口三步走：入口→逻辑→返回"</li>
+                            </ul>
+                        </div>
+                        <div class="concept-card">
+                            <h3>📚 带着情境听课</h3>
+                            <p>想象自己是后厨大厨，前端是服务员，接口就是你们之间的"点菜单"</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===================== SLIDE 2: 什么是接口 ===================== -->
+        <section class="slide">
+            <div class="layout-center">
+                <div class="panel">
+                    <h2>什么是接口（API）？</h2>
+                    <div class="concept-card">
+                        <h3>🏠 生活类比</h3>
+                        <p>接口像餐厅的<strong>点菜窗口</strong>：顾客（前端）说要什么菜（请求），后厨（后端）按单做好端出来（响应）。窗口的规格、菜单格式就是接口的"契约"。</p>
+                    </div>
+                    <div class="card-grid">
+                        <div class="concept-card">
+                            <h3>📍 路径 URL</h3>
+                            <p>接口的"地址"<br><code>/api/login/</code></p>
+                        </div>
+                        <div class="concept-card">
+                            <h3>📝 方法 Method</h3>
+                            <p>GET 查 · POST 增<br>PUT 改 · DELETE 删</p>
+                        </div>
+                        <div class="concept-card">
+                            <h3>📦 请求 & 响应</h3>
+                            <p>传入参数 → 返回 JSON</p>
+                        </div>
+                    </div>
+                    <blockquote class="blockquote">接口 = 软件系统之间"对话"的约定方式</blockquote>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===================== SLIDE 3: 接口的作用 ===================== -->
+        <section class="slide">
+            <div class="layout-split">
+                <div class="panel">
+                    <h2>接口的三大作用</h2>
+                    <div class="timeline">
+                        <div class="timeline-item">
+                            <div class="timeline-bullet"></div>
+                            <div class="timeline-content">
+                                <h4>1. 解耦</h4>
+                                <p>前端不需要知道后端怎么存数据，后端不需要知道前端怎么画页面</p>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-bullet"></div>
+                            <div class="timeline-content">
+                                <h4>2. 复用</h4>
+                                <p>同一个接口可以被网页、App、小程序、第三方系统调用</p>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-bullet"></div>
+                            <div class="timeline-content">
+                                <h4>3. 协作</h4>
+                                <p>先定好接口契约，前后端可以并行开发</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel">
+                    <h2>接口像快递单</h2>
+                    <div class="concept-card">
+                        <ul>
+                            <li><strong>寄件地址</strong> = URL</li>
+                            <li><strong>寄什么</strong> = 请求参数</li>
+                            <li><strong>期望收到什么</strong> = 响应格式</li>
+                            <li><strong>快递员</strong> = HTTP 协议</li>
+                        </ul>
+                    </div>
+                    <p class="hint">👉 写清楚"快递单"，双方才能顺利交接</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===================== SLIDE 4: Django 和接口 ===================== -->
+        <section class="slide">
+            <div class="layout-center">
+                <div class="panel">
+                    <h2>Django 如何管理接口？</h2>
+                    <div class="card-grid">
+                        <div class="concept-card">
+                            <h3>📍 urls.py</h3>
+                            <p><strong>前台接待</strong><br>定义 URL 和视图的映射<br>"哪个地址找哪个人"</p>
+                        </div>
+                        <div class="concept-card">
+                            <h3>⚙️ views.py</h3>
+                            <p><strong>办事员</strong><br>处理请求、执行逻辑<br>真正干活的地方</p>
+                        </div>
+                        <div class="concept-card">
+                            <h3>🗄️ models.py</h3>
+                            <p><strong>档案室</strong><br>定义数据库表结构<br>数据怎么存</p>
+                        </div>
+                    </div>
+                    <div class="code-block">
+<pre>
+请求 Request
+    ↓
+urls.py 路由匹配
+    ↓
+views.py 视图处理
+    ↓
+models.py 数据库操作
+    ↓
+返回 JSON Response
+</pre>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===================== SLIDE 5: 写接口三步走 ===================== -->
+        <section class="slide">
+            <div class="layout-center">
+                <div class="panel">
+                    <h2>写接口三步走</h2>
+                    <div class="pr-flow">
+                        <div class="pr-step">
+                            <div class="step-num">1</div>
+                            <strong>定义入口</strong>
+                            <span>urls.py 注册路由</span>
+                        </div>
+                        <div class="pr-step">
+                            <div class="step-num">2</div>
+                            <strong>处理逻辑</strong>
+                            <span>views.py 写业务代码</span>
+                        </div>
+                        <div class="pr-step">
+                            <div class="step-num">3</div>
+                            <strong>返回结果</strong>
+                            <span>JsonResponse 返回 JSON</span>
+                        </div>
+                    </div>
+                    <blockquote class="blockquote">入口 → 逻辑 → 返回，每个接口都是这个套路</blockquote>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===================== SLIDE 6: 代码示例 - urls.py ===================== -->
+        <section class="slide">
+            <div class="layout-split">
+                <div class="panel">
+                    <h2>第一步：定义路由</h2>
+                    <div class="concept-card">
+                        <h3>💡 关键点</h3>
+                        <ul>
+                            <li><code>path()</code> 定义 URL 和视图的映射</li>
+                            <li>第一个参数是 URL 路径</li>
+                            <li>第二个参数是处理函数</li>
+                            <li><code>&lt;int:pk&gt;</code> 是动态参数（pk = Primary Key 主键）</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="panel">
+                    <h2>urls.py</h2>
+                    <div class="code-enhanced">
+                        <div class="code-header">
+                            <div class="dots">
+                                <span class="dot red"></span>
+                                <span class="dot yellow"></span>
+                                <span class="dot green"></span>
+                            </div>
+                            <span class="filename">accounts/urls.py</span>
+                            <button class="copy-btn" onclick="copyCode(this)">复制</button>
+                        </div>
+                        <div class="code-body">
+<pre><span class="comment"># accounts/urls.py</span>
+<span class="keyword">from</span> django.urls <span class="keyword">import</span> path
+<span class="keyword">from</span> . <span class="keyword">import</span> views
+
+urlpatterns = [
+    <span class="comment"># 登录接口</span>
+    <span class="function">path</span>(<span class="string">'api/login/'</span>,
+         views.login_view,
+         name=<span class="string">'login'</span>),
+
+    <span class="comment"># 商品列表</span>
+    <span class="function">path</span>(<span class="string">'api/products/'</span>,
+         views.product_list,
+         name=<span class="string">'product-list'</span>),
+
+    <span class="comment"># 商品详情（带动态ID）</span>
+    <span class="function">path</span>(<span class="string">'api/products/&lt;int:pk&gt;/'</span>,
+         views.product_detail,
+         name=<span class="string">'product-detail'</span>),
+]</pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===================== SLIDE 7: 代码示例 - views.py ===================== -->
+        <section class="slide">
+            <div class="layout-split">
+                <div class="panel">
+                    <h2>第二步：处理逻辑</h2>
+                    <div class="concept-card">
+                        <h3>💡 视图函数结构</h3>
+                        <ul>
+                            <li>接收 <code>request</code> 参数</li>
+                            <li>判断请求方法 GET/POST</li>
+                            <li>解析请求数据</li>
+                            <li>执行业务逻辑</li>
+                            <li>返回 JsonResponse</li>
+                        </ul>
+                    </div>
+                    <p class="hint">📂 对照代码：demo_project/accounts/views.py</p>
+                </div>
+                <div class="panel">
+                    <h2>views.py</h2>
+                    <div class="code-enhanced">
+                        <div class="code-header">
+                            <div class="dots">
+                                <span class="dot red"></span>
+                                <span class="dot yellow"></span>
+                                <span class="dot green"></span>
+                            </div>
+                            <span class="filename">accounts/views.py</span>
+                            <button class="copy-btn" onclick="copyCode(this)">复制</button>
+                        </div>
+                        <div class="code-body">
+<pre><span class="comment"># accounts/views.py</span>
+<span class="keyword">import</span> json
+<span class="keyword">from</span> django.http <span class="keyword">import</span> <span class="class-name">JsonResponse</span>
+
+<span class="keyword">def</span> <span class="function">login_view</span>(request):
+    <span class="comment"># 1. 检查请求方法</span>
+    <span class="keyword">if</span> request.method != <span class="string">'POST'</span>:
+        <span class="keyword">return</span> <span class="function">JsonResponse</span>(
+            {<span class="string">'error'</span>: <span class="string">'只支持POST'</span>},
+            status=<span class="number">405</span>
+        )
+
+    <span class="comment"># 2. 解析请求体</span>
+    data = json.<span class="function">loads</span>(request.body)
+    username = data.<span class="function">get</span>(<span class="string">'username'</span>)
+    password = data.<span class="function">get</span>(<span class="string">'password'</span>)
+
+    <span class="comment"># 3. 业务逻辑（验证用户）</span>
+    <span class="comment"># ... 省略验证代码 ...</span>
+
+    <span class="comment"># 4. 返回结果</span>
+    <span class="keyword">return</span> <span class="function">JsonResponse</span>({
+        <span class="string">'code'</span>: <span class="number">0</span>,
+        <span class="string">'message'</span>: <span class="string">'登录成功'</span>,
+        <span class="string">'data'</span>: {<span class="string">'token'</span>: <span class="string">'xxx'</span>}
+    })</pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===================== SLIDE 8: HTTP 状态码 ===================== -->
+        <section class="slide">
+            <div class="layout-center">
+                <div class="panel">
+                    <h2>第三步：接口返回 - 状态码</h2>
+                    <div class="card-grid">
+                        <div class="concept-card">
+                            <h3>✅ 2xx 成功</h3>
+                            <ul>
+                                <li><strong>200</strong> OK 请求成功</li>
+                                <li><strong>201</strong> Created 创建成功</li>
+                            </ul>
+                        </div>
+                        <div class="concept-card">
+                            <h3>⚠️ 4xx 客户端错误</h3>
+                            <ul>
+                                <li><strong>400</strong> 参数错误</li>
+                                <li><strong>401</strong> 未认证/未登录</li>
+                                <li><strong>403</strong> 无权限</li>
+                                <li><strong>404</strong> 资源不存在</li>
+                            </ul>
+                        </div>
+                        <div class="concept-card">
+                            <h3>❌ 5xx 服务端错误</h3>
+                            <ul>
+                                <li><strong>500</strong> 服务器内部错误</li>
+                                <li><strong>502</strong> 网关错误</li>
+                                <li><strong>503</strong> 服务不可用</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <blockquote class="blockquote">状态码是接口的"表情包"，一眼看出成功还是失败</blockquote>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===================== SLIDE 9: 接口评价指标 ===================== -->
+        <section class="slide">
+            <div class="layout-center">
+                <div class="panel">
+                    <h2>接口评价：什么是"好"接口？</h2>
+                    <div class="card-grid">
+                        <div class="concept-card">
+                            <h3>✅ 正确性</h3>
+                            <p>功能符合预期，返回正确数据</p>
+                        </div>
+                        <div class="concept-card">
+                            <h3>🛡️ 稳定性</h3>
+                            <p>异常输入不会导致 500 崩溃</p>
+                        </div>
+                        <div class="concept-card">
+                            <h3>⚡ 性能</h3>
+                            <p>响应快，能扛住并发</p>
+                        </div>
+                        <div class="concept-card">
+                            <h3>🔒 安全性</h3>
+                            <p>防越权、防注入、防泄露</p>
+                        </div>
+                        <div class="concept-card">
+                            <h3>📖 易用性</h3>
+                            <p>文档清晰，命名直观</p>
+                        </div>
+                        <div class="concept-card">
+                            <h3>🔧 可维护性</h3>
+                            <p>代码清晰，方便修改</p>
+                        </div>
+                    </div>
+                    <blockquote class="blockquote">好接口 = 能用 + 好用 + 安全 + 好改</blockquote>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===================== SLIDE 10: RESTful 设计原则 ===================== -->
+        <section class="slide">
+            <div class="layout-split">
+                <div class="panel">
+                    <h2>RESTful 设计原则</h2>
+                    <div class="timeline">
+                        <div class="timeline-item">
+                            <div class="timeline-bullet"></div>
+                            <div class="timeline-content">
+                                <h4>用名词表示资源</h4>
+                                <p>✅ <code>/api/products/</code><br>❌ <code>/api/getProducts/</code></p>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-bullet"></div>
+                            <div class="timeline-content">
+                                <h4>用 HTTP 方法表示动作</h4>
+                                <p>GET 查 · POST 增 · PUT 改 · DELETE 删</p>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-bullet"></div>
+                            <div class="timeline-content">
+                                <h4>用状态码表示结果</h4>
+                                <p>200/201/400/401/404/500</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel">
+                    <h2>统一响应格式</h2>
+                    <div class="code-block">
+<pre>
+// 成功响应
+{
+  "code": 0,
+  "message": "success",
+  "data": {
+    "id": 1,
+    "title": "商品A"
+  }
+}
+
+// 错误响应
+{
+  "code": 400,
+  "message": "参数错误",
+  "data": null
+}
+</pre>
+                    </div>
+                    <p class="hint">团队约定统一格式，前端处理更方便</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===================== SLIDE 10.5: 更多设计原则 ===================== -->
+        <section class="slide">
+            <div class="layout-split">
+                <div class="panel">
+                    <h2>更多设计原则</h2>
+                    <div class="timeline">
+                        <div class="timeline-item">
+                            <div class="timeline-bullet"></div>
+                            <div class="timeline-content">
+                                <h4>🔢 版本管理</h4>
+                                <p>大改动时升级版本<br>
+                                <code>/api/v1/products/</code> → <code>/api/v2/products/</code><br>
+                                老版本保留过渡期</p>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-bullet"></div>
+                            <div class="timeline-content">
+                                <h4>🔄 幂等性</h4>
+                                <p><strong>幂等</strong>：多次调用结果一样<br>
+                                ✅ GET、PUT、DELETE 应该幂等<br>
+                                ❌ POST 通常不幂等（每次创建新资源）</p>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-bullet"></div>
+                            <div class="timeline-content">
+                                <h4>🔐 最小权限原则</h4>
+                                <p>接口只返回必要数据，不多给<br>
+                                敏感操作必须鉴权，按角色控制</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel">
+                    <h2>⚠️ 反面案例</h2>
+                    <div class="concept-card" style="background: rgba(239,68,68,0.1); border-color: #ef4444;">
+                        <h3 style="color: #ef4444;">❌ 坏接口示例</h3>
+                        <ul style="font-size: 0.9em; line-height: 1.8;">
+                            <li>返回用户密码哈希、身份证号</li>
+                            <li>传入空字符串直接 500 崩溃</li>
+                            <li>没有版本号，改接口直接断前端</li>
+                            <li>POST 创建订单没有防重复提交</li>
+                            <li>普通用户能访问管理员接口</li>
+                        </ul>
+                    </div>
+                    <div class="concept-card" style="background: rgba(34,197,94,0.1); border-color: #22c55e; margin-top: 1rem;">
+                        <h3 style="color: #22c55e;">✅ 好接口特征</h3>
+                        <ul style="font-size: 0.9em; line-height: 1.8;">
+                            <li>只返回必要字段</li>
+                            <li>异常输入返回 400，不崩溃</li>
+                            <li>有版本号，兼容老接口</li>
+                            <li>关键操作有幂等性保护</li>
+                            <li>严格的权限校验</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===================== SLIDE 11: 测试用例 ===================== -->
+        <section class="slide">
+            <div class="layout-center">
+                <div class="panel">
+                    <h2>为什么要写测试用例？</h2>
+                    <div class="card-grid">
+                        <div class="concept-card">
+                            <h3>🛡️ 防止回归</h3>
+                            <p>改代码时不会"改一处坏十处"</p>
+                        </div>
+                        <div class="concept-card">
+                            <h3>⚡ 自动化</h3>
+                            <p>比手动测试快，不会漏</p>
+                        </div>
+                        <div class="concept-card">
+                            <h3>📖 活文档</h3>
+                            <p>看测试就知道接口怎么用</p>
+                        </div>
+                        <div class="concept-card">
+                            <h3>🚀 CI/CD</h3>
+                            <p>上线前自动拦住问题</p>
+                        </div>
+                    </div>
+                    <div class="code-block">
+<pre>
+# 运行测试
+python manage.py test accounts
+
+# 带覆盖率运行
+coverage run manage.py test
+coverage report
+</pre>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===================== SLIDE 12: AI 写测试 - 验证方法 ===================== -->
+        <section class="slide">
+            <div class="layout-center">
+                <div class="panel">
+                    <h2>让 AI 写测试，如何防止"造假"？</h2>
+                    <div class="pr-flow">
+                        <div class="pr-step">
+                            <div class="step-num">1</div>
+                            <strong>跑一遍</strong>
+                            <span>看是否全部通过</span>
+                        </div>
+                        <div class="pr-step">
+                            <div class="step-num">2</div>
+                            <strong>故意改错</strong>
+                            <span>测试能否检测出来</span>
+                        </div>
+                        <div class="pr-step">
+                            <div class="step-num">3</div>
+                            <strong>查覆盖率</strong>
+                            <span>coverage report</span>
+                        </div>
+                        <div class="pr-step">
+                            <div class="step-num">4</div>
+                            <strong>真实数据</strong>
+                            <span>不要用 Mock 模拟</span>
+                        </div>
+                    </div>
+                    <div class="concept-card">
+                        <h3>⚠️ AI 常见"偷懒"行为</h3>
+                        <ul>
+                            <li>只检查状态码，不检查返回内容</li>
+                            <li>只写正常场景，没有异常场景</li>
+                            <li>用 Mock 模拟数据，掩盖真实问题</li>
+                            <li>测试之间有依赖，不能独立运行</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===================== SLIDE 13: 课堂测验 ===================== -->
+        <section class="slide">
+            <div class="layout-center">
+                <div class="panel">
+                    <h2>课堂小测</h2>
+                    <div class="task-card" data-quiz="api-quiz">
+                        <p>独立作答后点"提交测验"</p>
+                        <div class="quiz-question">
+                            <label>1) 以下哪种情况说明接口"稳定性"有问题？
+                                <select data-question="1">
+                                    <option value="">请选择</option>
+                                    <option value="A">A. 响应时间从 50ms 增加到 200ms</option>
+                                    <option value="B">B. 传入空字符串时返回 500 错误</option>
+                                    <option value="C">C. 接口文档缺少错误码说明</option>
+                                    <option value="D">D. JSON 字段用了驼峰命名</option>
+                                </select>
+                            </label>
+                        </div>
+                        <div class="quiz-question">
+                            <label>2) RESTful 风格中，删除资源用哪个方法？
+                                <select data-question="2">
+                                    <option value="">请选择</option>
+                                    <option value="A">A. GET</option>
+                                    <option value="B">B. POST</option>
+                                    <option value="C">C. PUT</option>
+                                    <option value="D">D. DELETE</option>
+                                </select>
+                            </label>
+                        </div>
+                        <div class="quiz-question">
+                            <label>3) 接口返回 401 状态码表示？
+                                <select data-question="3">
+                                    <option value="">请选择</option>
+                                    <option value="A">A. 请求成功</option>
+                                    <option value="B">B. 参数错误</option>
+                                    <option value="C">C. 未认证/未登录</option>
+                                    <option value="D">D. 资源不存在</option>
+                                </select>
+                            </label>
+                        </div>
+                        <button class="nav-button quiz-check" type="button">提交测验</button>
+                        <p class="quiz-result" aria-live="polite"></p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===================== SLIDE 14: 实战演示 ===================== -->
+        <section class="slide">
+            <div class="layout-center">
+                <div class="panel">
+                    <h2>实战：运行示例项目</h2>
+                    <div class="code-block">
+<pre>
+# 1. 进入示例项目目录
+cd demo_project
+
+# 2. 初始化数据库
+python manage.py migrate
+
+# 3. 创建管理员账户
+python manage.py createsuperuser
+
+# 4. 启动服务
+python manage.py runserver
+
+# 5. 测试接口
+curl http://localhost:8000/api/health/
+</pre>
+                    </div>
+                    <div class="card-grid">
+                        <div class="concept-card">
+                            <h3>📂 学生版</h3>
+                            <p>views.py 有 TODO 占位<br>需要自己实现</p>
+                        </div>
+                        <div class="concept-card">
+                            <h3>📖 参考答案</h3>
+                            <p>views_solution.py<br>完整实现代码</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===================== SLIDE 15: 总结 ===================== -->
+        <section class="slide">
+            <div class="layout-center">
+                <div class="panel">
+                    <h2>本节总结</h2>
+                    <ul class="summary-list">
+                        <li>✅ 理解了接口的定义和作用</li>
+                        <li>✅ 掌握了 Django 接口开发流程：入口→逻辑→返回</li>
+                        <li>✅ 学会了接口评价的六个维度</li>
+                        <li>✅ 知道如何让 AI 写测试并验证质量</li>
+                        <li>✅ 实战跑通了登录接口</li>
+                    </ul>
+                    <div class="card-grid">
+                        <div class="concept-card">
+                            <h3>🚀 课后作业</h3>
+                            <ul>
+                                <li>完成 views.py 中的 TODO</li>
+                                <li>运行测试验证实现</li>
+                                <li>设计并实现注册接口</li>
+                            </ul>
+                        </div>
+                        <div class="concept-card">
+                            <h3>🌏 现实价值</h3>
+                            <p>接口是后端的"门面"，写好接口就是让前端和用户都能愉快地和你的系统对话。</p>
+                        </div>
+                    </div>
+                    <button class="nav-button" onclick="location.reload()">↻ 重新开始演示</button>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="lesson-footer">
+        3.2 后端接口详解与实践 · AI 编程培训
+    </footer>
+
+    <script src="course_template/course-template.js"></script>
+    <script>
+        // 复制代码功能
+        function copyCode(btn) {
+            const codeBody = btn.closest('.code-enhanced').querySelector('pre');
+            const text = codeBody.textContent;
+            navigator.clipboard.writeText(text).then(() => {
+                btn.textContent = '已复制!';
+                setTimeout(() => btn.textContent = '复制', 2000);
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            initApiQuiz();
+        });
+
+        function initApiQuiz() {
+            const container = document.querySelector('[data-quiz="api-quiz"]');
+            if (!container) return;
+            const button = container.querySelector('.quiz-check');
+            const selects = container.querySelectorAll('select[data-question]');
+            const result = container.querySelector('.quiz-result');
+            const answers = { '1': 'B', '2': 'D', '3': 'C' };
+
+            button?.addEventListener('click', () => {
+                const blanks = [];
+                let correctCount = 0;
+
+                selects.forEach((select) => {
+                    const qid = select.dataset.question;
+                    select.classList.remove('quiz-wrong', 'quiz-correct');
+
+                    if (!select.value) {
+                        blanks.push(qid);
+                    } else {
+                        const isCorrect = select.value === answers[qid];
+                        select.classList.add(isCorrect ? 'quiz-correct' : 'quiz-wrong');
+                        if (isCorrect) correctCount++;
+                    }
+                });
+
+                if (blanks.length) {
+                    result.textContent = '请先完成所有题目（未作答：' + blanks.join(', ') + '）';
+                    result.style.color = '#b45309';
+                    return;
+                }
+
+                const total = selects.length;
+                if (correctCount === total) {
+                    result.textContent = '🎉 全部正确！';
+                    result.style.color = '#059669';
+                } else {
+                    result.textContent = `得分：${correctCount}/${total}，请检查标红的题目。`;
+                    result.style.color = '#b45309';
+                }
+            });
+        }
+    </script>
+</body>
+</html>
